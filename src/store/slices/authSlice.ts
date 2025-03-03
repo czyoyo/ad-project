@@ -1,6 +1,6 @@
 import { LoginCredentials, RegisterData, User } from '../../types/user.types.ts';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { removeStoredToken, setStoredToken } from '../../utils/localStorage.ts';
+import { removeToken, setToken } from '../../utils/localStorage.ts';
 
 // 비동기 액션 생성
 export const loginUser = createAsyncThunk(
@@ -9,7 +9,7 @@ export const loginUser = createAsyncThunk(
     try {
       const authService = new AuthService();
       const result = await authService.login(credentials.email, credentials.password);
-      setStoredToken(result.token);
+      setToken(result.token);
       return result;
     } catch (error) {
       return rejectWithValue(error instanceof Error ? error.message : '로그인에 실패했습니다.');
@@ -23,7 +23,7 @@ export const registerUser = createAsyncThunk(
     try {
       const authService = new AuthService();
       const result = await authService.register(userData);
-      setStoredToken(result.token);
+      setToken(result.token);
       return result;
     } catch (error) {
       return rejectWithValue(error instanceof Error ? error.message : '회원가입에 실패했습니다.');
@@ -37,7 +37,7 @@ export const refreshUserToken = createAsyncThunk(
     try {
       const authService = new AuthService();
       const result = await authService.refreshToken();
-      setStoredToken(result.token);
+      setToken(result.token);
       return result;
     } catch (error) {
       return rejectWithValue(error instanceof Error ? error.message : '토큰 갱신에 실패했습니다.');
@@ -85,7 +85,7 @@ const authSlice = createSlice({
     },
     setToken(state, action: PayloadAction<string>) {
       state.token = action.payload;
-      setStoredToken(action.payload);
+      setToken(action.payload);
     },
     setAuthLoading(state, action: PayloadAction<boolean>) {
       state.isLoading = action.payload;
@@ -97,7 +97,7 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       state.isAuthenticated = false;
-      removeStoredToken();
+      removeToken();
     },
     clearAuthError(state) {
       state.error = null;
@@ -153,7 +153,7 @@ const authSlice = createSlice({
         state.user = null;
         state.token = null;
         state.isAuthenticated = false;
-        removeStoredToken();
+        removeToken();
       });
 
     // 현재 사용자 정보 가져오기

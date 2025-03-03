@@ -1,0 +1,235 @@
+/* src/components/ui/Button/Button.module.css */
+
+/* 버튼 기본 스타일 */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}
+
+.button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* 버튼 크기 */
+.sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.md {
+  padding: 0.5rem 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.5rem;
+}
+
+.lg {
+  padding: 0.625rem 1.25rem;
+  font-size: 1rem;
+  line-height: 1.75rem;
+}
+
+.xl {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+/* 버튼 변형 */
+.primary {
+  background-color: #8b5cf6; /* 보라색 - 테마 기본 색상 */
+  color: white;
+  border: 1px solid transparent;
+}
+
+.primary:hover:not(:disabled) {
+  background-color: #7c3aed; /* 더 진한 보라색 */
+}
+
+.primary:focus-visible {
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5);
+}
+
+.primary:active:not(:disabled) {
+  background-color: #6d28d9; /* 가장 진한 보라색 */
+}
+
+.secondary {
+  background-color: #4b5563; /* 회색 */
+  color: white;
+  border: 1px solid transparent;
+}
+
+.secondary:hover:not(:disabled) {
+  background-color: #374151; /* 더 진한 회색 */
+}
+
+.secondary:focus-visible {
+  box-shadow: 0 0 0 2px rgba(75, 85, 99, 0.5);
+}
+
+.secondary:active:not(:disabled) {
+  background-color: #1f2937; /* 가장 진한 회색 */
+}
+
+.outline {
+  background-color: transparent;
+  color: #374151; /* 회색 */
+  border: 1px solid #d1d5db; /* 연한 회색 테두리 */
+}
+
+.outline:hover:not(:disabled) {
+  background-color: #f3f4f6; /* 매우 연한 회색 배경 */
+  border-color: #9ca3af; /* 더 진한 회색 테두리 */
+}
+
+.outline:focus-visible {
+  box-shadow: 0 0 0 2px rgba(209, 213, 219, 0.5);
+}
+
+.outline:active:not(:disabled) {
+  background-color: #e5e7eb;
+}
+
+/* 다크 모드용 outline 버튼 */
+:global(.dark) .outline {
+  color: #e5e7eb; /* 밝은 회색 */
+  border-color: #4b5563; /* 진한 회색 테두리 */
+}
+
+:global(.dark) .outline:hover:not(:disabled) {
+  background-color: #374151; /* 진한 회색 배경 */
+  border-color: #6b7280; /* 더 밝은 회색 테두리 */
+}
+
+/* 테두리 없는 버튼 스타일 */
+.ghost {
+  background-color: transparent;
+  color: #6b7280; /* 회색 */
+  border: 1px solid transparent;
+}
+
+.ghost:hover:not(:disabled) {
+  background-color: #f3f4f6; /* 매우 연한 회색 배경 */
+  color: #374151; /* 더 진한 회색 텍스트 */
+}
+
+.ghost:focus-visible {
+  box-shadow: 0 0 0 2px rgba(107, 114, 128, 0.5);
+}
+
+.ghost:active:not(:disabled) {
+  background-color: #e5e7eb;
+}
+
+/* 다크 모드용 ghost 버튼 */
+:global(.dark) .ghost {
+  color: #9ca3af; /* 밝은 회색 */
+}
+
+:global(.dark) .ghost:hover:not(:disabled) {
+  background-color: #374151; /* 진한 회색 배경 */
+  color: #e5e7eb; /* 더 밝은 회색 텍스트 */
+}
+
+/* 위험 작업용 버튼 */
+.danger {
+  background-color: #ef4444; /* 빨간색 */
+  color: white;
+  border: 1px solid transparent;
+}
+
+.danger:hover:not(:disabled) {
+  background-color: #dc2626; /* 더 진한 빨간색 */
+}
+
+.danger:focus-visible {
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.5);
+}
+
+.danger:active:not(:disabled) {
+  background-color: #b91c1c; /* 가장 진한 빨간색 */
+}
+
+/* 성공 작업용 버튼 */
+.success {
+  background-color: #10b981; /* 녹색 */
+  color: white;
+  border: 1px solid transparent;
+}
+
+.success:hover:not(:disabled) {
+  background-color: #059669; /* 더 진한 녹색 */
+}
+
+.success:focus-visible {
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.5);
+}
+
+.success:active:not(:disabled) {
+  background-color: #047857; /* 가장 진한 녹색 */
+}
+
+/* 너비 옵션 */
+.fullWidth {
+  width: 100%;
+}
+
+/* 로딩 상태 */
+.loading {
+  position: relative;
+  color: transparent !important;
+}
+
+.loading::after {
+  content: "";
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 2px solid;
+  border-color: currentColor transparent currentColor transparent;
+  animation: button-loading-spinner 0.75s linear infinite;
+}
+
+@keyframes button-loading-spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 아이콘이 있는 버튼 */
+.withIcon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.iconLeft {
+  margin-right: 0.5rem;
+}
+
+.iconRight {
+  margin-left: 0.5rem;
+}
+
+/* 둥근 버튼 (원형) */
+.rounded {
+  border-radius: 9999px;
+}

@@ -1,6 +1,6 @@
 import { User } from '../types/user.types.ts';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { getStoredToken, removeStoredToken, setStoredToken } from '../utils/localStorage.ts';
+import { getToken, removeToken, setToken } from '../utils/localStorage.ts';
 
 interface AuthContextType {
   user: User | null;
@@ -17,19 +17,19 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(getStoredToken());
+  const [token, setToken] = useState<string | null>(getToken());
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const initAuth = async () => {
-      const storedToken = getStoredToken();
+      const storedToken = getToken();
       if (storedToken) {
         try {
           const userData = await authService.getCurrentUser();
           setUser(userData);
         } catch (error) {
           console.error('Failed to fetch user data', error);
-          removeStoredToken();
+          removeToken();
           setToken(null);
         }
       }
@@ -45,7 +45,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const { user: userData, token: authToken } = await authService.login(email, password);
       setUser(userData);
       setToken(authToken);
-      setStoredToken(authToken);
+      setToken(authToken);
     } finally {
       setIsLoading(false);
     }
@@ -57,7 +57,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const { user: newUser, token: authToken } = await authService.register(userData);
       setUser(newUser);
       setToken(authToken);
-      setStoredToken(authToken);
+      setToken(authToken);
     } finally {
       setIsLoading(false);
     }
@@ -66,14 +66,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const logout = () => {
     setUser(null);
     setToken(null);
-    removeStoredToken();
+    removeToken();
   };
 
   const refreshToken = async () => {
     try {
       const { token: newToken } = await authService.refreshToken();
       setToken(newToken);
-      setStoredToken(newToken);
+      setToken(newToken);
       return newToken;
     } catch (error) {
       logout();
