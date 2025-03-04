@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
-import { LoginCredentials, RegisterData, User } from '../types/user.types';
+import { RegisterData, User } from '../types/user.types';
 import authApi from '../api/auth.api';
 import { authStorage } from '../utils/localStorage';
 import {

@@ -1,16 +1,14 @@
-// src/lib/axios.ts
-
-/**
- * Axios 인스턴스와 관련 설정을 정의합니다.
- * API 요청에 필요한 기본 설정과 인터셉터를 포함합니다.
- */
-
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 import { authStorage } from '../utils/localStorage';
 import AuthService from '../services/auth.service';
 import { ApiResponse } from '../types/api.types';
 import env from '../config/environment';
 import { ERROR_MESSAGES } from '../config/constants';
+
+/**
+ * Axios 인스턴스와 관련 설정을 정의합니다.
+ * API 요청에 필요한 기본 설정과 인터셉터를 포함합니다.
+ */
 
 // Axios 설정
 const config: AxiosRequestConfig = {

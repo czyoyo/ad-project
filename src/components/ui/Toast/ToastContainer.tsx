@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../store/store';
-import { removeToast } from '../../store/slices/uiSlice';
+import { RootState } from '../../../store/store';
+import { removeToast } from '../../../store/slices/uiSlice';
 import Toast from './Toast';
 
 /**

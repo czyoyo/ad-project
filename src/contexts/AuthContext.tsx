@@ -1,16 +1,7 @@
-interface AuthContextType {
-  user: User | null;
-  token: string | null;
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  register: (userData: Omit<User, 'id'>) => Promise<void>;
-  logout: () => void;
-  refreshToken: () => Promise<void>;
-}
-import { User } from '../types/user.types.ts';
+import authService from '../services/auth.service.ts';
+import { RegisterData, User } from '../types/user.types.ts';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { getToken, removeToken, setToken } from '../utils/localStorage.ts';
+import { authStorage } from '../utils/localStorage.ts';
 
 interface AuthContextType {
   user: User | null;
@@ -18,29 +9,33 @@ interface AuthContextType {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (userData: Omit<User, 'id'>) => Promise<void>;
+  register: (userData: RegisterData) => Promise<void>; // RegisterData 타입으로 변경
   logout: () => void;
   refreshToken: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
   const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(getToken());
+  const [token, setTokenState] = useState<string | null>(authStorage.getToken());
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const initAuth = async () => {
-      const storedToken = getToken();
+      const storedToken = authStorage.getToken();
       if (storedToken) {
         try {
           const userData = await authService.getCurrentUser();
           setUser(userData);
         } catch (error) {
           console.error('Failed to fetch user data', error);
-          removeToken();
-          setToken(null);
+          authStorage.removeToken();
+          setTokenState(null);
         }
       }
       setIsLoading(false);
@@ -54,20 +49,21 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     try {
       const { user: userData, token: authToken } = await authService.login(email, password);
       setUser(userData);
-      setToken(authToken);
-      setToken(authToken);
+      setTokenState(authToken);
+      authStorage.setToken(authToken);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const register = async (userData: Omit<User, 'id'>) => {
+  const register = async (userData: RegisterData) => {
+    // RegisterData 타입으로 변경
     setIsLoading(true);
     try {
       const { user: newUser, token: authToken } = await authService.register(userData);
       setUser(newUser);
-      setToken(authToken);
-      setToken(authToken);
+      setTokenState(authToken);
+      authStorage.setToken(authToken);
     } finally {
       setIsLoading(false);
     }
@@ -75,16 +71,17 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const logout = () => {
     setUser(null);
-    setToken(null);
-    removeToken();
+    setTokenState(null);
+    authStorage.removeToken();
   };
 
-  const refreshToken = async () => {
+  const refreshToken = async (): Promise<void> => {
+    // void 반환 타입 명시
     try {
       const { token: newToken } = await authService.refreshToken();
-      setToken(newToken);
-      setToken(newToken);
-      return newToken;
+      setTokenState(newToken);
+      authStorage.setToken(newToken);
+      // return 문 제거
     } catch (error) {
       logout();
       throw error;

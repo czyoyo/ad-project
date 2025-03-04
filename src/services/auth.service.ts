@@ -1,7 +1,6 @@
 import axiosInstance from '../api/base.api';
-import { User, LoginCredentials, RegisterData, AuthResponse } from '../types/user.types';
+import { User, RegisterData, AuthResponse, PasswordChangeData } from '../types/user.types';
 import { authStorage, userStorage } from '../utils/localStorage';
-import jwt_decode from 'jwt-decode';
 
 /**
  * 인증 관련 서비스
@@ -166,6 +165,23 @@ export class AuthService {
       return response.data;
     } catch (error) {
       console.error('Reset password error:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * 비밀번호 변경
+   * @param passwordData
+   */
+  async changePassword(passwordData: PasswordChangeData): Promise<{ message: string }> {
+    try {
+      const response = await axiosInstance.post<{ message: string }>(
+        `${this.API_URL}/change-password`,
+        passwordData,
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Change password error:', error);
       throw error;
     }
   }

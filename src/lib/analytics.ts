@@ -1,12 +1,10 @@
-// src/lib/analytics.ts
+// 환경 설정 가져오기
+import env from '../config/environment';
 
 /**
  * 애널리틱스 서비스 통합
  * 사용자 행동과 앱 성능을 추적하는 함수들을 제공합니다.
  */
-
-// 환경 설정 가져오기
-import env from '../config/environment';
 
 // 이벤트 타입 정의
 type EventCategory = 'user' | 'shop' | 'search' | 'navigation' | 'error' | 'performance';

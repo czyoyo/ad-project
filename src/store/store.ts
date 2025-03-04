@@ -28,7 +28,7 @@ const authPersistConfig = {
 const uiPersistConfig = {
   key: 'ui',
   storage,
-  whitelist: ['isDarkMode', 'viewMode', 'itemsPerPage'], // 이 설정들만 유지
+  whitelist: ['isDarkMode', 'viewMode', 'itemsPerPage', 'isPageLoading'], // 이 설정들만 유지
 };
 
 // persist 설정 - 사용자 즐겨찾기 유지

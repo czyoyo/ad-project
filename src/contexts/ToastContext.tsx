@@ -67,7 +67,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
       });
 
       // 자동 제거 타이머 설정 (duration이 0이면 자동 제거하지 않음)
-      if (newToast.duration > 0) {
+      if ((newToast.duration ?? 0) > 0) {
         setTimeout(() => {
           removeToast(id);
         }, newToast.duration);

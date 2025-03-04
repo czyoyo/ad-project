@@ -5,7 +5,7 @@ import { Shop, ShopFilter } from '../types/shop.types';
 import ShopService from '../services/shop.service';
 import { setFilters, clearFilters } from '../store/slices/shopSlice';
 import { useGeolocation } from './index';
-import { useDebounce } from './useDebounce';
+import useDebounce from './useDebounce';
 
 /**
  * 상점 검색 결과 인터페이스

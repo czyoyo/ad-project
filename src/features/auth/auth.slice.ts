@@ -1,13 +1,7 @@
 // src/store/slices/authSlice.ts
 
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import {
-  User,
-  LoginCredentials,
-  RegisterData,
-  AuthResponse,
-  PasswordChangeData,
-} from '../../types/user.types';
+import { User, LoginCredentials, RegisterData, PasswordChangeData } from '../../types/user.types';
 import { authStorage, userStorage } from '../../utils/localStorage';
 import AuthService from '../../services/auth.service';
 

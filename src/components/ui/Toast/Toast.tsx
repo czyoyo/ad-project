@@ -103,6 +103,7 @@ const Toast: React.FC<ToastProps> = ({ id, type, message, title, onClose }) => {
 
   return (
     <div
+      data-id={id} // 여기에 id 속성을 추가
       className={`max-w-xs w-full p-4 rounded shadow-lg border-l-4 ${typeClasses[type]} ${
         isExiting ? 'animate-fade-out-up' : 'animate-fade-in-down'
       } transition-opacity duration-300`}

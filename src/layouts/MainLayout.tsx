@@ -11,7 +11,7 @@ import ToastContainer from '../components/ui/Toast/ToastContainer';
  * 헤더, 푸터, 토스트 메시지를 포함한 기본 레이아웃
  */
 const MainLayout: React.FC = () => {
-  const { isLoading } = useSelector((state: RootState) => state.ui);
+  const { isPageLoading } = useSelector((state: RootState) => state.ui);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -20,7 +20,7 @@ const MainLayout: React.FC = () => {
 
       {/* 메인 콘텐츠 */}
       <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {isLoading ? (
+        {isPageLoading ? (
           <div className="flex justify-center items-center h-full min-h-[60vh]">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
           </div>

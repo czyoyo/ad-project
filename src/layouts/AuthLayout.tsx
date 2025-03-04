@@ -10,7 +10,7 @@ import Logo from '../components/common/Logo/Logo';
  * 로그인, 회원가입, 비밀번호 재설정 등의 페이지에 사용됨
  */
 const AuthLayout: React.FC = () => {
-  const { isLoading } = useSelector((state: RootState) => state.ui);
+  const { isPageLoading } = useSelector((state: RootState) => state.ui);
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
@@ -26,7 +26,7 @@ const AuthLayout: React.FC = () => {
       {/* 인증 콘텐츠 */}
       <main className="flex-grow flex items-center justify-center p-4">
         <div className="w-full max-w-md">
-          {isLoading ? (
+          {isPageLoading ? (
             <div className="flex justify-center items-center py-12">
               <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
             </div>

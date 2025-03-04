@@ -6,6 +6,14 @@ export interface ToastMessage {
   type: 'success' | 'error' | 'info' | 'warning';
   message: string;
   duration?: number; // 밀리초 단위, 기본값은 아래에서 설정
+  position?:
+    | 'top-right'
+    | 'top-left'
+    | 'bottom-right'
+    | 'bottom-left'
+    | 'top-center'
+    | 'bottom-center';
+  title?: string; // 이 속성도 필요하다면 추가
 }
 
 // 모달 상태 타입 정의
