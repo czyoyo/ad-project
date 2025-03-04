@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useDebounce } from '../../../hooks';
+// import { useDebounce } from '../../../hooks';
 import { searchStorage } from '../../../utils/localStorage';
 
 /**
@@ -18,7 +18,7 @@ const SearchBar: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // 검색어 디바운싱
-  const debouncedSearchTerm = useDebounce(searchTerm, 300);
+  // const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
   // 검색 기록 로드
   useEffect(() => {

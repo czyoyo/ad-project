@@ -1,6 +1,7 @@
 import { LoginCredentials, RegisterData, User } from '../../types/user.types.ts';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { removeToken, setToken } from '../../utils/localStorage.ts';
+import { AuthService } from '../../services/auth.service.ts';
 
 // 비동기 액션 생성
 export const loginUser = createAsyncThunk(

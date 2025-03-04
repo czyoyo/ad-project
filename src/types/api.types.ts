@@ -1,5 +1,7 @@
+import { InternalAxiosRequestConfig } from 'axios';
+
 // 기본 API 응답 인터페이스
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = never> {
   data?: T;
   message: string;
   code: number;
@@ -106,4 +108,9 @@ export interface WebSocketMessage<T = unknown> {
   type: string;
   payload: T;
   timestamp: string;
+}
+
+// CustomAxiosRequestConfig 인터페이스 정의
+export interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
+  _retry?: boolean;
 }

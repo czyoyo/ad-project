@@ -13,7 +13,7 @@ export const axiosInstance = axios.create({
 });
 
 // 인터셉터 추가
-axiosInstance.interceptors.request.use(authInterceptor());
-axiosInstance.interceptors.response.use((response) => response, errorInterceptor());
+axiosInstance.interceptors.request.use(authInterceptor);
+axiosInstance.interceptors.response.use((response) => response, errorInterceptor);
 
 export default axiosInstance;

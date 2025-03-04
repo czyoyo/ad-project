@@ -2,6 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { store } from '../../store/store.ts';
 import { logout, setAuthError, setAuthLoading } from '../../store/slices/authSlice.ts';
 import { showToast } from '../../store/slices/uiSlice.ts';
+import { AuthService } from '../../services/auth.service.ts';
 
 /**
  * 오류 인터셉터는 API 응답의 오류를 처리합니다.
@@ -40,8 +41,9 @@ export const errorInterceptor = async (error: AxiosError) => {
             // Axios 인스턴스로 원래 요청 재시도
             return axios(error.config);
           }
-        } catch (refreshError) {
+        } catch (error) {
           // 토큰 갱신 실패 시 로그아웃 처리
+          console.error('토큰 갱신 실패:', error);
           store.dispatch(logout());
           store.dispatch(
             showToast({

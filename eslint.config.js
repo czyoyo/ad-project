@@ -24,6 +24,8 @@ export default [
     },
     rules: {
       'prettier/prettier': 'error',
+      // `no-unused-vars` 규칙에 '_`로 시작하는 변수는 무시하도록 설정
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     },
   },
   // Prettier와 충돌할 수 있는 ESLint 규칙을 비활성화

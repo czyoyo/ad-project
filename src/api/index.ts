@@ -1,6 +1,6 @@
 // src/api/index.ts
-
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import { CustomAxiosRequestConfig } from '../types/api.types';
+import axios, { AxiosInstance, AxiosResponse, AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { authStorage } from '../utils/localStorage';
 import AuthService from '../services/auth.service';
 import env from '../config/environment';
@@ -30,7 +30,7 @@ const baseApi: AxiosInstance = axios.create({
 
 // 요청 인터셉터 설정
 baseApi.interceptors.request.use(
-  async (config: AxiosRequestConfig): Promise<AxiosRequestConfig> => {
+  async (config: InternalAxiosRequestConfig): Promise<InternalAxiosRequestConfig> => {
     // 로딩 상태 활성화 (Redux 상태 업데이트 등)
     // store.dispatch({ type: 'ui/setLoading', payload: true });
 
@@ -39,10 +39,7 @@ baseApi.interceptors.request.use(
 
     // 헤더에 인증 토큰 추가
     if (token) {
-      config.headers = {
-        ...config.headers,
-        Authorization: `Bearer ${token}`,
-      };
+      config.headers.set('Authorization', `Bearer ${token}`);
     }
 
     return config;
@@ -61,31 +58,27 @@ baseApi.interceptors.response.use(
     // store.dispatch({ type: 'ui/setLoading', payload: false });
     return response;
   },
-  async (error: AxiosError): Promise<any> => {
+  async (error: AxiosError): Promise<never> => {
     // 로딩 상태 비활성화
     // store.dispatch({ type: 'ui/setLoading', payload: false });
 
     // 원본 요청 설정
-    const originalRequest = error.config;
+    const originalRequest = error.config as CustomAxiosRequestConfig;
 
     // 토큰 만료 오류 처리 (401 에러)
-    if (error.response?.status === 401 && originalRequest && !(originalRequest as any)._retry) {
+    if (error.response?.status === 401 && originalRequest && !originalRequest._retry) {
       try {
         // 토큰 갱신 재시도 플래그 설정
-        (originalRequest as any)._retry = true;
+        originalRequest._retry = true;
 
         // 토큰 갱신 시도
         const refreshToken = authStorage.getRefreshToken();
         if (refreshToken) {
-          const authService = new AuthService();
-          const refreshResult = await authService.refreshToken();
+          const refreshResult = await AuthService.refreshToken();
 
           if (refreshResult && refreshResult.token) {
             // 새 토큰으로 헤더 업데이트
-            originalRequest.headers = {
-              ...originalRequest.headers,
-              Authorization: `Bearer ${refreshResult.token}`,
-            };
+            originalRequest.headers.set('Authorization', `Bearer ${refreshResult.token}`);
 
             // 원래 요청 재시도
             return baseApi(originalRequest);
@@ -116,7 +109,7 @@ baseApi.interceptors.response.use(
 
     if (error.response) {
       // 서버에서 응답을 받은 경우
-      const responseData = error.response.data as ApiResponse<any>;
+      const responseData = error.response.data as ApiResponse<never>;
 
       if (responseData && responseData.message) {
         errorMessage = responseData.message;
@@ -147,6 +140,9 @@ baseApi.interceptors.response.use(
       errorMessage = ERROR_MESSAGES.NETWORK_ERROR;
     }
 
+    // 에러 메시지 콘솔에 출력
+    console.error('에러 메시지:', errorMessage);
+
     // 에러 토스트 메시지 표시
     // store.dispatch({
     //   type: 'ui/showToast',
@@ -156,6 +152,8 @@ baseApi.interceptors.response.use(
     //   },
     // });
 
+    // 에러 메시지를 덮어 씌움
+    (error as AxiosError).message = errorMessage;
     return Promise.reject(error);
   },
 );

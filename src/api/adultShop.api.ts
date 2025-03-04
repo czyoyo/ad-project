@@ -76,7 +76,7 @@ const adultShopApi = {
       if (reviewData.title) formData.append('title', reviewData.title);
       formData.append('content', reviewData.content);
 
-      reviewData.images.forEach((image, index) => {
+      reviewData.images.forEach((image, _) => {
         formData.append(`images`, image);
       });
 
