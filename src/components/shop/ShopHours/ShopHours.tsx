@@ -1,5 +1,5 @@
 import React from 'react';
-import { BusinessHours } from '../../types/shop.types';
+import { BusinessHours } from '../../../types/shop.types.ts';
 
 interface ShopHoursProps {
   hours: BusinessHours;
@@ -20,7 +20,7 @@ const ShopHours: React.FC<ShopHoursProps> = ({ hours }) => {
   return (
     <ul className="space-y-2">
       {dayOrder.map((day) => {
-        const hourInfo = hours[day];
+        const hourInfo = hours[day as keyof BusinessHours];
         if (!hourInfo) return null;
 
         const isToday = day === currentDay;
@@ -35,12 +35,18 @@ const ShopHours: React.FC<ShopHoursProps> = ({ hours }) => {
             }`}
           >
             <span className="w-8">{day}</span>
-            {hourInfo.isClosed ? (
-              <span className="text-red-500 dark:text-red-400">휴무일</span>
+            {hourInfo && 'isClosed' in hourInfo ? (
+              hourInfo.isClosed ? (
+                <span className="text-red-500 dark:text-red-400">휴무일</span>
+              ) : (
+                <span>
+                  {'open' in hourInfo && 'close' in hourInfo
+                    ? `${hourInfo.open} - ${hourInfo.close}`
+                    : '시간 정보 없음'}
+                </span>
+              )
             ) : (
-              <span>
-                {hourInfo.open} - {hourInfo.close}
-              </span>
+              <span>시간 정보 없음</span>
             )}
             {isToday && (
               <span className="text-xs bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded ml-2">

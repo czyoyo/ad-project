@@ -66,6 +66,7 @@ interface AuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
   error: string | null;
+  isInitialized: boolean; // 이 속성 추가
 }
 
 const initialState: AuthState = {
@@ -74,6 +75,7 @@ const initialState: AuthState = {
   isAuthenticated: false,
   isLoading: false,
   error: null,
+  isInitialized: false, // 초기값 설정
 };
 
 const authSlice = createSlice({
