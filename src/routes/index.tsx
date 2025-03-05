@@ -1,7 +1,10 @@
-import { ReactNode, JSX } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store/store';
+import { JSX } from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+// 보호된 라우트 컴포넌트
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
+import AdminRoute from './AdminRoute';
 
 // 레이아웃
 import MainLayout from '../layouts/MainLayout';
@@ -22,25 +25,7 @@ import PrivacyPolicy from '../pages/Legal/PrivacyPolicy';
 import TermsOfService from '../pages/Legal/TermsOfService';
 import ResetPassword from '../pages/ResetPassword/ResetPassword';
 import Contact from '../pages/Contact/Contact';
-
-// 보호된 라우트 컴포넌트
-// 보호된 라우트 컴포넌트
-interface RouteProps {
-  children: ReactNode;
-}
-
-function PrivateRoute({ children }: RouteProps): JSX.Element {
-  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
-
-  return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
-}
-
-// 공개 라우트 컴포넌트 (로그인 상태에서는 접근 불가)
-function PublicRoute({ children }: RouteProps): JSX.Element {
-  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
-
-  return !isAuthenticated ? <>{children}</> : <Navigate to="/" replace />;
-}
+import ForbiddenPage from '../pages/ForbiddenPage/ForbiddenPage'; // 🔥 403 페이지 추가
 
 function AppRoutes(): JSX.Element {
   return (
@@ -56,7 +41,7 @@ function AppRoutes(): JSX.Element {
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />
-
+        <Route path="/403" element={<ForbiddenPage />} /> {/* 🔥 403 접근 금지 페이지 */}
         {/* 인증이 필요한 라우트 */}
         <Route
           path="/profile"
@@ -74,6 +59,16 @@ function AppRoutes(): JSX.Element {
             </PrivateRoute>
           }
         />
+        {/* 관리자 전용 라우트 예시 */}
+        <Route
+          path="/admin/*"
+          element={
+            <AdminRoute>
+              {/* 여기에 관리자 컴포넌트를 넣으세요 */}
+              <div>관리자 페이지</div>
+            </AdminRoute>
+          }
+        />
       </Route>
 
       {/* 인증 레이아웃으로 감싸진 라우트 */}
@@ -81,7 +76,7 @@ function AppRoutes(): JSX.Element {
         <Route
           path="/login"
           element={
-            <PublicRoute>
+            <PublicRoute restrictedWhenAuthenticated={true}>
               <Login />
             </PublicRoute>
           }
@@ -89,7 +84,7 @@ function AppRoutes(): JSX.Element {
         <Route
           path="/register"
           element={
-            <PublicRoute>
+            <PublicRoute restrictedWhenAuthenticated={true}>
               <Register />
             </PublicRoute>
           }
@@ -97,7 +92,7 @@ function AppRoutes(): JSX.Element {
         <Route
           path="/reset-password"
           element={
-            <PublicRoute>
+            <PublicRoute restrictedWhenAuthenticated={false}>
               <ResetPassword />
             </PublicRoute>
           }
@@ -105,7 +100,7 @@ function AppRoutes(): JSX.Element {
         <Route
           path="/reset-password/:token"
           element={
-            <PublicRoute>
+            <PublicRoute restrictedWhenAuthenticated={false}>
               <ResetPassword />
             </PublicRoute>
           }

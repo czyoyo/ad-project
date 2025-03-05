@@ -11,19 +11,17 @@ interface PublicRouteProps {
 /**
  * 공개 라우트 컴포넌트
  * 인증되지 않은 사용자가 접근할 수 있는 라우트를 정의합니다.
- *
- * @param children 렌더링할 컴포넌트
- * @param restrictedWhenAuthenticated 인증된 사용자의 접근을 제한할지 여부 (로그인/회원가입 페이지 등)
  */
 function PublicRoute({
   children,
   restrictedWhenAuthenticated = true,
 }: PublicRouteProps): JSX.Element {
   const location = useLocation();
-  const { isAuthenticated, isInitialized } = useSelector((state: RootState) => state.auth);
+  const { isAuthenticated, isLoading } = useSelector((state: RootState) => state.auth);
+  const { isPageLoading } = useSelector((state: RootState) => state.ui);
 
-  // 인증 초기화 중인 경우 로딩 표시
-  if (!isInitialized) {
+  // 인증 또는 페이지 로딩 중인 경우 로딩 표시
+  if (isLoading || isPageLoading) {
     return (
       <div className="flex justify-center items-center h-full min-h-[60vh]">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
