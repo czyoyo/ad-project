@@ -47,13 +47,13 @@ axiosInstance.interceptors.response.use(
   },
   async (error: AxiosError) => {
     // 에러 응답 처리
-    const originalRequest = error.config;
+    const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
 
     // 401 에러(인증 실패)이고 원래 요청이 있는 경우
-    if (error.response?.status === 401 && originalRequest && !(originalRequest as any)._retry) {
+    if (error.response?.status === 401 && originalRequest && !originalRequest._retry) {
       try {
         // 토큰 갱신 시도
-        (originalRequest as any)._retry = true;
+        originalRequest._retry = true;
         const refreshResult = await AuthService.refreshToken();
 
         // 새 토큰으로 헤더 업데이트
@@ -77,7 +77,7 @@ axiosInstance.interceptors.response.use(
 
     if (error.response) {
       // 서버 응답이 있는 경우
-      const responseData = error.response.data as ApiResponse<any>;
+      const responseData = error.response.data as ApiResponse<unknown>;
 
       if (responseData && responseData.message) {
         errorMessage = responseData.message;
@@ -123,9 +123,9 @@ export const api = {
    * @param params URL 쿼리 파라미터
    * @param config 추가 Axios 설정
    */
-  async get<T = any>(
+  async get<T = unknown>(
     url: string,
-    params?: Record<string, any>,
+    params?: Record<string, unknown>,
     config?: AxiosRequestConfig,
   ): Promise<T> {
     const response = await axiosInstance.get<ApiResponse<T>>(url, {
@@ -152,7 +152,7 @@ export const api = {
    * @param data 요청 바디 데이터
    * @param config 추가 Axios 설정
    */
-  async put<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
+  async put<T = unknown>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<T> {
     const response = await axiosInstance.put<ApiResponse<T>>(url, data, config);
     return response.data.data as T;
   },
@@ -163,7 +163,7 @@ export const api = {
    * @param data 요청 바디 데이터
    * @param config 추가 Axios 설정
    */
-  async patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
+  async patch<T = unknown>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<T> {
     const response = await axiosInstance.patch<ApiResponse<T>>(url, data, config);
     return response.data.data as T;
   },
@@ -173,7 +173,7 @@ export const api = {
    * @param url 요청 URL
    * @param config 추가 Axios 설정
    */
-  async delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
+  async delete<T = unknown>(url: string, config?: AxiosRequestConfig): Promise<T> {
     const response = await axiosInstance.delete<ApiResponse<T>>(url, config);
     return response.data.data as T;
   },
