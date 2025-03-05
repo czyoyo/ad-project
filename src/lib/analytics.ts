@@ -26,7 +26,7 @@ interface EventParams {
   label?: string;
   value?: number;
   nonInteraction?: boolean;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface PageViewParams {
@@ -107,7 +107,7 @@ export const trackPageView = (params: PageViewParams): void => {
  * @param userId 사용자 ID
  * @param userProperties 사용자 속성
  */
-export const identifyUser = (userId: string, userProperties?: Record<string, any>): void => {
+export const identifyUser = (userId: string, userProperties?: Record<string, unknown>): void => {
   const userData = {
     ...defaultData,
     user_id: userId,
@@ -136,7 +136,10 @@ export const identifyUser = (userId: string, userProperties?: Record<string, any
  * @param error 에러 객체 또는 메시지
  * @param additionalInfo 추가 정보
  */
-export const trackError = (error: Error | string, additionalInfo?: Record<string, any>): void => {
+export const trackError = (
+  error: Error | string,
+  additionalInfo?: Record<string, unknown>,
+): void => {
   const errorMessage = error instanceof Error ? error.message : error;
   const errorStack = error instanceof Error ? error.stack : undefined;
 
@@ -173,7 +176,7 @@ export const trackError = (error: Error | string, additionalInfo?: Record<string
 export const trackSearch = (
   query: string,
   resultsCount: number,
-  filters?: Record<string, any>,
+  filters?: Record<string, unknown>,
 ): void => {
   trackEvent({
     category: 'search',
@@ -228,6 +231,6 @@ export default {
 // TypeScript에서 window.gtag에 대한 타입 정의
 declare global {
   interface Window {
-    gtag?: (command: string, action: string, params?: Record<string, any>) => void;
+    gtag?: (command: string, action: string, params?: Record<string, unknown>) => void;
   }
 }
