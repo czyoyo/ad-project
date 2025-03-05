@@ -1,12 +1,10 @@
-// src/routes/PublicRoute.tsx
-
-import React from 'react';
+import { ReactNode, JSX } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 
 interface PublicRouteProps {
-  children: React.ReactNode;
+  children: ReactNode;
   restrictedWhenAuthenticated?: boolean;
 }
 
@@ -17,10 +15,10 @@ interface PublicRouteProps {
  * @param children 렌더링할 컴포넌트
  * @param restrictedWhenAuthenticated 인증된 사용자의 접근을 제한할지 여부 (로그인/회원가입 페이지 등)
  */
-const PublicRoute: React.FC<PublicRouteProps> = ({
+function PublicRoute({
   children,
   restrictedWhenAuthenticated = true,
-}) => {
+}: PublicRouteProps): JSX.Element {
   const location = useLocation();
   const { isAuthenticated, isInitialized } = useSelector((state: RootState) => state.auth);
 
@@ -42,6 +40,6 @@ const PublicRoute: React.FC<PublicRouteProps> = ({
 
   // 제한이 없거나 인증되지 않은 경우 정상적으로 컴포넌트 표시
   return <>{children}</>;
-};
+}
 
 export default PublicRoute;

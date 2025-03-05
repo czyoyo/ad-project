@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode, JSX } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
@@ -24,20 +24,25 @@ import ResetPassword from '../pages/ResetPassword/ResetPassword';
 import Contact from '../pages/Contact/Contact';
 
 // 보호된 라우트 컴포넌트
-const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
+// 보호된 라우트 컴포넌트
+interface RouteProps {
+  children: ReactNode;
+}
+
+function PrivateRoute({ children }: RouteProps): JSX.Element {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
   return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
-};
+}
 
 // 공개 라우트 컴포넌트 (로그인 상태에서는 접근 불가)
-const PublicRoute = ({ children }: { children: React.ReactNode }) => {
+function PublicRoute({ children }: RouteProps): JSX.Element {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
   return !isAuthenticated ? <>{children}</> : <Navigate to="/" replace />;
-};
+}
 
-const AppRoutes = () => {
+function AppRoutes(): JSX.Element {
   return (
     <Routes>
       {/* 메인 레이아웃으로 감싸진 라우트 */}
@@ -111,6 +116,6 @@ const AppRoutes = () => {
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
-};
+}
 
 export default AppRoutes;

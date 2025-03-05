@@ -1,4 +1,4 @@
-import React from 'react';
+import { JSX } from 'react';
 
 interface LogoProps {
   className?: string;
@@ -7,7 +7,7 @@ interface LogoProps {
 /**
  * 로고 컴포넌트
  */
-const Logo: React.FC<LogoProps> = ({ className = 'h-8 w-auto' }) => {
+function Logo({ className = 'h-8 w-auto' }: LogoProps): JSX.Element {
   return (
     <svg className={className} viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
       {/* 로고 배경 */}
@@ -24,6 +24,6 @@ const Logo: React.FC<LogoProps> = ({ className = 'h-8 w-auto' }) => {
       <circle cx="32" cy="10" r="1" fill="white" />
     </svg>
   );
-};
+}
 
 export default Logo;

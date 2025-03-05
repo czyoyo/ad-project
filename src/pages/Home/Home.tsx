@@ -1,5 +1,5 @@
 // src/pages/Home/Home.tsx
-import React, { useEffect, useState } from 'react';
+import { JSX, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Shop } from '../../types/shop.types';
@@ -10,7 +10,7 @@ import CategoryList from '../../components/shop/CategoryList/CategoryList';
 import Button from '../../components/ui/Button/Button';
 import ShopService from '../../services/shop.service';
 
-const Home: React.FC = () => {
+function Home(): JSX.Element {
   const { location, getLocation } = useGeolocation();
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const [popularShops, setPopularShops] = useState<Shop[]>([]);
@@ -184,6 +184,6 @@ const Home: React.FC = () => {
       )}
     </div>
   );
-};
+}
 
 export default Home;

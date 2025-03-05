@@ -1,11 +1,4 @@
-import React, {
-  createContext,
-  useState,
-  useContext,
-  useCallback,
-  ReactNode,
-  useEffect,
-} from 'react';
+import { createContext, useState, useContext, useCallback, ReactNode, useEffect, JSX } from 'react';
 
 // 토스트 메시지 타입 정의
 export interface Toast {
@@ -41,12 +34,12 @@ interface ToastProviderProps {
   maxToasts?: number;
 }
 
-export const ToastProvider: React.FC<ToastProviderProps> = ({
+export function ToastProvider({
   children,
   defaultDuration = 5000,
   defaultPosition = 'top-right',
   maxToasts = 5,
-}) => {
+}: ToastProviderProps): JSX.Element {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
   // 토스트 추가 함수
@@ -107,7 +100,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
       <ToastContainer toasts={toasts} removeToast={removeToast} />
     </ToastContext.Provider>
   );
-};
+}
 
 // 토스트 렌더링 컴포넌트
 interface ToastContainerProps {
@@ -115,7 +108,7 @@ interface ToastContainerProps {
   removeToast: (id: string) => void;
 }
 
-const ToastContainer: React.FC<ToastContainerProps> = ({ toasts, removeToast }) => {
+function ToastContainer({ toasts, removeToast }: ToastContainerProps): JSX.Element {
   // 위치별로 토스트 그룹화
   const groupedToasts = toasts.reduce<Record<string, Toast[]>>((acc, toast) => {
     const position = toast.position || 'top-right';
@@ -165,7 +158,7 @@ const ToastContainer: React.FC<ToastContainerProps> = ({ toasts, removeToast }) 
       ))}
     </>
   );
-};
+}
 
 // 토스트 타입별 스타일 클래스
 const getToastTypeClass = (type: Toast['type']): string => {

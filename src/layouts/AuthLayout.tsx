@@ -1,4 +1,4 @@
-import React from 'react';
+import { JSX } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
@@ -9,7 +9,7 @@ import Logo from '../components/common/Logo/Logo';
  * 인증 관련 페이지를 위한 레이아웃 컴포넌트
  * 로그인, 회원가입, 비밀번호 재설정 등의 페이지에 사용됨
  */
-const AuthLayout: React.FC = () => {
+function AuthLayout(): JSX.Element {
   const { isPageLoading } = useSelector((state: RootState) => state.ui);
 
   return (
@@ -56,6 +56,6 @@ const AuthLayout: React.FC = () => {
       <ToastContainer />
     </div>
   );
-};
+}
 
 export default AuthLayout;

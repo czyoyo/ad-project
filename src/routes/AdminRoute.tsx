@@ -1,12 +1,10 @@
-// src/routes/AdminRoute.tsx
-
-import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
+import { JSX, ReactNode } from 'react';
 
 interface AdminRouteProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 /**
@@ -16,7 +14,7 @@ interface AdminRouteProps {
  *
  * @param children 렌더링할 컴포넌트
  */
-const AdminRoute: React.FC<AdminRouteProps> = ({ children }) => {
+function AdminRoute({ children }: AdminRouteProps): JSX.Element {
   const location = useLocation();
   const { isAuthenticated, isInitialized, user } = useSelector((state: RootState) => state.auth);
 
@@ -41,6 +39,6 @@ const AdminRoute: React.FC<AdminRouteProps> = ({ children }) => {
 
   // 관리자인 경우 정상적으로 컴포넌트 표시
   return <>{children}</>;
-};
+}
 
 export default AdminRoute;

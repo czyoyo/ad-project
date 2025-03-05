@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { ChangeEvent, FormEvent, JSX, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks';
 import Button from '../../components/ui/Button/Button';
 import { isValidEmail, isValidPassword, passwordStrength } from '../../utils/validation';
 
-const Register: React.FC = () => {
+function Register(): JSX.Element {
   const navigate = useNavigate();
   const { register, isLoading, error } = useAuth();
 
@@ -27,7 +27,7 @@ const Register: React.FC = () => {
   });
 
   // 입력 변경 핸들러
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
 
     setFormData((prev) => ({
@@ -140,7 +140,7 @@ const Register: React.FC = () => {
   };
 
   // 회원가입 제출 핸들러
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!validateForm()) return;
@@ -368,6 +368,6 @@ const Register: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Register;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, JSX } from 'react';
 
 interface ToastProps {
   id: string;
@@ -11,7 +11,7 @@ interface ToastProps {
 /**
  * 개별 토스트 메시지 컴포넌트
  */
-const Toast: React.FC<ToastProps> = ({ id, type, message, title, onClose }) => {
+function Toast({ id, type, message, title, onClose }: ToastProps): JSX.Element {
   const [isExiting, setIsExiting] = useState(false);
 
   // 토스트 타입에 따른 스타일 클래스
@@ -137,6 +137,6 @@ const Toast: React.FC<ToastProps> = ({ id, type, message, title, onClose }) => {
       </div>
     </div>
   );
-};
+}
 
 export default Toast;

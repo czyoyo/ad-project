@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ShopImage } from '../../../types/shop.types';
 
 interface ShopGalleryProps {
   images: ShopImage[];
 }
 
-const ShopGallery: React.FC<ShopGalleryProps> = ({ images }) => {
+function ShopGallery({ images }: ShopGalleryProps) {
   const [activeImage, setActiveImage] = useState<number>(0);
   const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -169,6 +169,6 @@ const ShopGallery: React.FC<ShopGalleryProps> = ({ images }) => {
       )}
     </>
   );
-};
+}
 
 export default ShopGallery;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, JSX } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
@@ -11,7 +11,7 @@ import SearchBar from '../SearchBar/SearchBar';
  * 헤더 컴포넌트
  * 네비게이션, 로고, 검색, 사용자 메뉴 등을 포함
  */
-const Header: React.FC = () => {
+function Header(): JSX.Element {
   // const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -187,6 +187,6 @@ const Header: React.FC = () => {
       </div>
     </header>
   );
-};
+}
 
 export default Header;

@@ -1,5 +1,5 @@
 // src/pages/Search/Search.tsx
-import React, { useEffect, useState } from 'react';
+import { JSX, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Shop, ShopFilter } from '../../types/shop.types';
@@ -10,7 +10,7 @@ import ShopCard from '../../components/shop/ShopCard/ShopCard';
 import SearchFilters from '../../components/shop/SearchFilters/SearchFilters';
 import Button from '../../components/ui/Button/Button';
 
-const Search: React.FC = () => {
+function Search(): JSX.Element {
   const location = useLocation();
   const dispatch = useDispatch();
   const { applyFilter, resetFilters } = useShopFilter();
@@ -241,6 +241,6 @@ const Search: React.FC = () => {
       )}
     </div>
   );
-};
+}
 
 export default Search;

@@ -1,4 +1,4 @@
-import React from 'react';
+import { JSX } from 'react';
 import { Link } from 'react-router-dom';
 
 interface Category {
@@ -21,7 +21,7 @@ const dummyCategories: Category[] = [
   { id: 6, name: '기타', image: '/images/categories/etc.jpg' },
 ];
 
-const CategoryList: React.FC<CategoryListProps> = ({ categories = dummyCategories, limit = 6 }) => {
+function CategoryList({ categories = dummyCategories, limit = 6 }: CategoryListProps): JSX.Element {
   const displayedCategories = categories.slice(0, limit);
 
   return (
@@ -44,6 +44,6 @@ const CategoryList: React.FC<CategoryListProps> = ({ categories = dummyCategorie
       ))}
     </div>
   );
-};
+}
 
 export default CategoryList;

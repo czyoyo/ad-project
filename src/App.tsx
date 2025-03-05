@@ -4,23 +4,24 @@ import { store } from './store/store.ts';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ToastProvider } from './contexts/ToastContext';
-import { BrowserRouter as Router, Routes } from 'react-router-dom';
-import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { JSX } from 'react';
+import AppRoutes from './routes';
 
-const App: React.FC = () => {
+function App(): JSX.Element {
   return (
     <Provider store={store}>
       <AuthProvider>
         <ThemeProvider>
           <ToastProvider>
             <Router>
-              <Routes />
+              <AppRoutes />
             </Router>
           </ToastProvider>
         </ThemeProvider>
       </AuthProvider>
     </Provider>
   );
-};
+}
 
 export default App;

@@ -1,6 +1,6 @@
 import authService from '../services/auth.service.ts';
 import { RegisterData, User } from '../types/user.types.ts';
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { createContext, JSX, ReactNode, useContext, useEffect, useState } from 'react';
 import { authStorage } from '../utils/localStorage.ts';
 
 interface AuthContextType {
@@ -16,11 +16,11 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}: {
+interface AuthProviderProps {
   children: ReactNode;
-}) => {
+}
+
+export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   const [user, setUser] = useState<User | null>(null);
   const [token, setTokenState] = useState<string | null>(authStorage.getStorageToken());
   const [isLoading, setIsLoading] = useState(true);
@@ -50,7 +50,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       const { user: userData, token: authToken } = await authService.login(email, password);
       setUser(userData);
       setTokenState(authToken);
-      authStorage.setToken(authToken);
+      authStorage.setStorageToken(authToken);
     } finally {
       setIsLoading(false);
     }
@@ -63,7 +63,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       const { user: newUser, token: authToken } = await authService.register(userData);
       setUser(newUser);
       setTokenState(authToken);
-      authStorage.setToken(authToken);
+      authStorage.setStorageToken(authToken);
     } finally {
       setIsLoading(false);
     }
@@ -80,7 +80,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     try {
       const { token: newToken } = await authService.refreshToken();
       setTokenState(newToken);
-      authStorage.setToken(newToken);
+      authStorage.setStorageToken(newToken);
       // return 문 제거
     } catch (error) {
       logout();
@@ -104,7 +104,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
 export const useAuth = () => {
   const context = useContext(AuthContext);

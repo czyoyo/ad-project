@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { JSX, useState, FormEvent } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks';
 import Button from '../../components/ui/Button/Button';
 import { isValidEmail } from '../../utils/validation';
 
-const Login: React.FC = () => {
+function Login(): JSX.Element {
   const navigate = useNavigate();
   const location = useLocation();
   const { login, isLoading, error } = useAuth();
@@ -49,7 +49,7 @@ const Login: React.FC = () => {
   };
 
   // 로그인 제출 핸들러
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!validateForm()) return;
@@ -198,6 +198,6 @@ const Login: React.FC = () => {
       </div> */}
     </div>
   );
-};
+}
 
 export default Login;

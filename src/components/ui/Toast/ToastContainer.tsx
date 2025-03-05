@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { JSX, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { removeToast } from '../../../store/slices/uiSlice';
@@ -8,7 +8,7 @@ import Toast from './Toast';
  * 토스트 메시지 컨테이너 컴포넌트
  * 앱 전역에서 사용되는 토스트 메시지 표시
  */
-const ToastContainer: React.FC = () => {
+function ToastContainer(): JSX.Element {
   const dispatch = useDispatch();
   const { toasts } = useSelector((state: RootState) => state.ui);
 
@@ -79,6 +79,6 @@ const ToastContainer: React.FC = () => {
       {renderToasts(bottomCenterToasts, 'bottom-center')}
     </>
   );
-};
+}
 
 export default ToastContainer;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { JSX, useState } from 'react';
 import { Review } from '../../../types/shop.types';
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
@@ -7,7 +7,7 @@ interface ReviewListProps {
   reviews: Review[];
 }
 
-const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
+function ReviewList({ reviews }: ReviewListProps): JSX.Element {
   const [expandedReviews, setExpandedReviews] = useState<string[]>([]);
 
   // 리뷰 펼치기/접기 토글
@@ -192,6 +192,6 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
       })}
     </div>
   );
-};
+}
 
 export default ReviewList;

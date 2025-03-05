@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import Button from '../../../components/ui/Button/Button';
 import { Review } from '../../../types/shop.types';
 
@@ -20,7 +20,7 @@ interface ReviewFormProps {
   onSubmit: (reviewData: ReviewFormData) => Promise<void>;
 }
 
-const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit }) => {
+function ReviewForm({ onSubmit }: ReviewFormProps) {
   const [formData, setFormData] = useState<ReviewFormData>({
     rating: 0,
     title: '',
@@ -40,13 +40,13 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit }) => {
   };
 
   // 입력 필드 변경 핸들러
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   // 이미지 업로드 핸들러
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files) return;
 
@@ -80,7 +80,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit }) => {
   };
 
   // 폼 제출 핸들러
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     // 유효성 검사
@@ -267,6 +267,6 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit }) => {
       </div>
     </form>
   );
-};
+}
 
 export default ReviewForm;

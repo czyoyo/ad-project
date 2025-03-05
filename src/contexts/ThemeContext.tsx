@@ -1,4 +1,5 @@
-import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
+import { createContext, useState, useEffect, useContext, ReactNode } from 'react';
+import { JSX } from 'react';
 
 // 테마 모드 타입 정의
 type ThemeMode = 'light' | 'dark' | 'system';
@@ -19,10 +20,10 @@ interface ThemeProviderProps {
   defaultTheme?: ThemeMode;
 }
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({
+export function ThemeProvider({
   children,
   defaultTheme = 'system',
-}) => {
+}: ThemeProviderProps): JSX.Element {
   // 로컬 스토리지에서 테마 설정 읽기 또는 기본값 사용
   const [theme, setTheme] = useState<ThemeMode>(() => {
     const savedTheme = localStorage.getItem('theme') as ThemeMode | null;
@@ -92,7 +93,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
       {children}
     </ThemeContext.Provider>
   );
-};
+}
 
 // 테마 컨텍스트를 사용하기 위한 커스텀 훅
 export const useTheme = (): ThemeContextType => {

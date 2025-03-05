@@ -1,4 +1,4 @@
-import React from 'react';
+import { JSX, useState, ChangeEvent, FormEvent } from 'react';
 import { ShopFilter } from '../../../types/shop.types';
 
 interface SearchFiltersProps {
@@ -7,14 +7,14 @@ interface SearchFiltersProps {
   onClose: () => void;
 }
 
-const SearchFilters: React.FC<SearchFiltersProps> = ({
+function SearchFilters({
   currentFilters,
   onApplyFilters,
   onClose,
-}) => {
-  const [filters, setFilters] = React.useState<Partial<ShopFilter>>(currentFilters);
+}: SearchFiltersProps): JSX.Element {
+  const [filters, setFilters] = useState<Partial<ShopFilter>>(currentFilters);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -22,7 +22,7 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     onApplyFilters(filters);
     onClose();
@@ -81,6 +81,6 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
       </div>
     </form>
   );
-};
+}
 
 export default SearchFilters;

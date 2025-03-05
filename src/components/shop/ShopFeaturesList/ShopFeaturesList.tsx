@@ -1,4 +1,4 @@
-import React from 'react';
+import { JSX } from 'react';
 
 interface ShopFeaturesListProps {
   features: {
@@ -8,7 +8,7 @@ interface ShopFeaturesListProps {
   }[];
 }
 
-const ShopFeaturesList: React.FC<ShopFeaturesListProps> = ({ features }) => {
+function ShopFeaturesList({ features }: ShopFeaturesListProps): JSX.Element {
   if (!features || features.length === 0) {
     return <div className="text-gray-500 dark:text-gray-400">등록된 매장 특징이 없습니다.</div>;
   }
@@ -46,6 +46,6 @@ const ShopFeaturesList: React.FC<ShopFeaturesListProps> = ({ features }) => {
       ))}
     </div>
   );
-};
+}
 
 export default ShopFeaturesList;

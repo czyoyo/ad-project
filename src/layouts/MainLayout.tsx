@@ -1,4 +1,4 @@
-import React from 'react';
+import { JSX } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from '../components/common/Header/Header';
 import Footer from '../components/common/Footer/Footer';
@@ -10,7 +10,7 @@ import ToastContainer from '../components/ui/Toast/ToastContainer';
  * 메인 레이아웃 컴포넌트
  * 헤더, 푸터, 토스트 메시지를 포함한 기본 레이아웃
  */
-const MainLayout: React.FC = () => {
+function MainLayout(): JSX.Element {
   const { isPageLoading } = useSelector((state: RootState) => state.ui);
 
   return (
@@ -36,6 +36,6 @@ const MainLayout: React.FC = () => {
       <ToastContainer />
     </div>
   );
-};
+}
 
 export default MainLayout;

@@ -1,12 +1,10 @@
-// src/routes/PrivateRoute.tsx
-
-import React from 'react';
+import { ReactNode, JSX } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 
 interface PrivateRouteProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 /**
@@ -16,7 +14,7 @@ interface PrivateRouteProps {
  *
  * @param children 렌더링할 컴포넌트
  */
-const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
+function PrivateRoute({ children }: PrivateRouteProps): JSX.Element {
   const location = useLocation();
   const { isAuthenticated, isInitialized } = useSelector((state: RootState) => state.auth);
 
@@ -37,6 +35,6 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
 
   // 인증된 경우 정상적으로 컴포넌트 표시
   return <>{children}</>;
-};
+}
 
 export default PrivateRoute;

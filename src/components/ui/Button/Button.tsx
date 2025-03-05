@@ -1,6 +1,4 @@
-// src/components/ui/Button/Button.tsx
-
-import React, { ButtonHTMLAttributes, ReactNode } from 'react';
+import { ButtonHTMLAttributes, ReactNode, MouseEvent, JSX } from 'react';
 import styles from './Button.module.css';
 
 // 버튼 크기 타입
@@ -27,7 +25,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   className?: string;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 /**
@@ -46,7 +44,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  * // 아이콘 사용
  * <Button leftIcon={<SearchIcon />}>검색</Button>
  */
-const Button: React.FC<ButtonProps> = ({
+function Button({
   children,
   variant = 'primary',
   size = 'md',
@@ -60,7 +58,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   type = 'button',
   ...rest
-}) => {
+}: ButtonProps): JSX.Element {
   // 클래스 이름 조합
   const buttonClasses = [
     styles.button,
@@ -93,6 +91,6 @@ const Button: React.FC<ButtonProps> = ({
       {rightIcon && !isLoading && <span className={styles.iconRight}>{rightIcon}</span>}
     </button>
   );
-};
+}
 
 export default Button;

@@ -1,11 +1,11 @@
-import React from 'react';
+import { JSX } from 'react';
 import { BusinessHours } from '../../../types/shop.types.ts';
 
 interface ShopHoursProps {
   hours: BusinessHours;
 }
 
-const ShopHours: React.FC<ShopHoursProps> = ({ hours }) => {
+function ShopHours({ hours }: ShopHoursProps): JSX.Element {
   if (!hours || Object.keys(hours).length === 0) {
     return <div className="text-gray-500 dark:text-gray-400">등록된 영업시간 정보가 없습니다.</div>;
   }
@@ -58,6 +58,6 @@ const ShopHours: React.FC<ShopHoursProps> = ({ hours }) => {
       })}
     </ul>
   );
-};
+}
 
 export default ShopHours;

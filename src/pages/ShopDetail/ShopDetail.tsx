@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { JSX, useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Shop, Review } from '../../types/shop.types';
@@ -14,7 +14,7 @@ import ShopMap from '../../components/shop/ShopMap/ShopMap';
 import ShopHours from '../../components/shop/ShopHours/ShopHours';
 import { formatPhoneNumber, formatAddress } from '../../utils/formatting';
 
-const ShopDetail: React.FC = () => {
+function ShopDetail(): JSX.Element {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -469,6 +469,6 @@ const ShopDetail: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
 export default ShopDetail;

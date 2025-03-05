@@ -1,11 +1,11 @@
-import React from 'react';
+import { JSX } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 
 /**
  * 푸터 컴포넌트
  */
-const Footer: React.FC = () => {
+function Footer(): JSX.Element {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -149,6 +149,6 @@ const Footer: React.FC = () => {
       </div>
     </footer>
   );
-};
+}
 
 export default Footer;

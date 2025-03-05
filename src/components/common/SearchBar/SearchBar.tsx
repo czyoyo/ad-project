@@ -1,4 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import {
+  useState,
+  useRef,
+  useEffect,
+  JSX,
+  ChangeEvent,
+  KeyboardEvent,
+  MouseEvent as ReactMouseEvent,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 // import { useDebounce } from '../../../hooks';
@@ -7,7 +15,7 @@ import { searchStorage } from '../../../utils/localStorage';
 /**
  * 검색바 컴포넌트
  */
-const SearchBar: React.FC = () => {
+function SearchBar(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState('');
@@ -27,7 +35,7 @@ const SearchBar: React.FC = () => {
 
   // 외부 클릭 감지
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: globalThis.MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setShowHistory(false);
         if (searchTerm === '') {
@@ -65,7 +73,7 @@ const SearchBar: React.FC = () => {
   };
 
   // 검색어 변경 핸들러
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
     if (e.target.value.length > 0) {
       setIsExpanded(true);
@@ -73,7 +81,7 @@ const SearchBar: React.FC = () => {
   };
 
   // 키보드 이벤트 핸들러
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleSearch();
     } else if (e.key === 'Escape') {
@@ -89,7 +97,7 @@ const SearchBar: React.FC = () => {
   };
 
   // 검색 기록 삭제 핸들러
-  const handleDeleteHistory = (e: React.MouseEvent, term: string) => {
+  const handleDeleteHistory = (e: ReactMouseEvent, term: string): void => {
     e.stopPropagation();
     searchStorage.removeSearchTerm(term);
     setSearchHistory(searchStorage.getSearchHistory());
@@ -232,6 +240,6 @@ const SearchBar: React.FC = () => {
       )}
     </div>
   );
-};
+}
 
 export default SearchBar;
