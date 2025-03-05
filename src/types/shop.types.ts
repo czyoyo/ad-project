@@ -3,6 +3,20 @@ export interface Shop {
   id: string;
   name: string;
   description: string;
+  rating: number;
+  reviewCount: number;
+  status: ShopStatus;
+  images: ShopImage[];
+  features: ShopFeatures;
+  distance?: number; // Only used in search results
+  priceRange: 1 | 2 | 3 | 4 | 5;
+  businessHours: BusinessHours;
+  tags: string[];
+  owner?: string;
+  createdAt: string;
+  updatedAt: string;
+  isVerified: boolean;
+  categories: string[];
   address: {
     street: string;
     city: string;
@@ -19,6 +33,7 @@ export interface Shop {
     coordinates: [number, number]; // [longitude, latitude] for GeoJSON
   };
   contactInfo: {
+    // 연락처 정보
     phone?: string;
     email?: string;
     website?: string;
@@ -28,19 +43,6 @@ export interface Shop {
       instagram?: string;
       x?: string;
     };
-    businessHours: BusinessHours;
-    images: ShopImage[];
-    tags: string[];
-    rating: number;
-    reviewCount: number;
-    features: ShopFeatures;
-    priceRange: 1 | 2 | 3 | 4 | 5;
-    status: ShopStatus;
-    owner?: string;
-    createdAt: string;
-    updatedAt: string;
-    isVerified: boolean;
-    distance?: number; // Only used in search results
   };
 }
 

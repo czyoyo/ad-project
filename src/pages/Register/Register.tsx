@@ -1,4 +1,3 @@
-// src/pages/Register/Register.tsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks';
@@ -11,7 +10,7 @@ const Register: React.FC = () => {
 
   const [formData, setFormData] = useState({
     email: '',
-    username: '',
+    nickname: '',
     password: '',
     confirmPassword: '',
     acceptTerms: false,
@@ -20,7 +19,7 @@ const Register: React.FC = () => {
 
   const [errors, setErrors] = useState({
     email: '',
-    username: '',
+    nickname: '',
     password: '',
     confirmPassword: '',
     acceptTerms: '',
@@ -85,7 +84,7 @@ const Register: React.FC = () => {
   const validateForm = () => {
     const newErrors = {
       email: '',
-      username: '',
+      nickname: '',
       password: '',
       confirmPassword: '',
       acceptTerms: '',
@@ -104,11 +103,11 @@ const Register: React.FC = () => {
     }
 
     // 사용자명 검사
-    if (!formData.username) {
-      newErrors.username = '사용자명을 입력해주세요.';
+    if (!formData.nickname) {
+      newErrors.nickname = '사용자 닉네임을 입력해주세요.';
       isValid = false;
-    } else if (formData.username.length < 3) {
-      newErrors.username = '사용자명은 3자 이상이어야 합니다.';
+    } else if (formData.nickname.length < 3) {
+      newErrors.nickname = '닉네임은 3자 이상이어야 합니다.';
       isValid = false;
     }
 
@@ -149,7 +148,7 @@ const Register: React.FC = () => {
     try {
       const success = await register({
         email: formData.email,
-        username: formData.username,
+        nickname: formData.nickname,
         password: formData.password,
         acceptTerms: formData.acceptTerms,
         acceptMarketing: formData.acceptMarketing,
@@ -207,24 +206,24 @@ const Register: React.FC = () => {
         {/* 사용자명 입력 */}
         <div>
           <label
-            htmlFor="username"
+            htmlFor="nickname"
             className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
           >
             사용자명
           </label>
           <input
-            id="username"
-            name="username"
+            id="nickname"
+            name="nickname"
             type="text"
-            value={formData.username}
+            value={formData.nickname}
             onChange={handleChange}
             className={`w-full px-3 py-2 border ${
-              errors.username ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+              errors.nickname ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
             } rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:text-white`}
-            placeholder="username"
+            placeholder="nickname"
           />
-          {errors.username && (
-            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.username}</p>
+          {errors.nickname && (
+            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.nickname}</p>
           )}
         </div>
 

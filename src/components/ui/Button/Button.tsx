@@ -7,7 +7,14 @@ import styles from './Button.module.css';
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 
 // 버튼 변형 타입
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'success';
+export type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'outline'
+  | 'ghost'
+  | 'danger'
+  | 'success'
+  | 'white';
 
 // 버튼 프롭스 인터페이스
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

@@ -5,6 +5,8 @@ import useResponsive from './useResponsive';
 import useShopSearch from './useShopSearch';
 import useGeolocation from './useGeolocation';
 import useDebounce from './useDebounce';
+import useFavorites from './useFavorites.ts';
+import useShopFilter from './useShopFilter.ts';
 
 export {
   useAuth,
@@ -14,4 +16,6 @@ export {
   useShopSearch,
   useGeolocation,
   useDebounce,
+  useFavorites,
+  useShopFilter,
 };

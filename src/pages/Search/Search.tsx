@@ -13,7 +13,7 @@ import Button from '../../components/ui/Button/Button';
 const Search: React.FC = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const { filters, applyFilter, resetFilters } = useShopFilter();
+  const { applyFilter, resetFilters } = useShopFilter();
   const { location: userLocation, getLocation } = useGeolocation();
   const searchFilters = useSelector((state: RootState) => state.shop.filters);
 

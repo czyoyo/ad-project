@@ -1,6 +1,6 @@
 // src/pages/Home/Home.tsx
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Shop } from '../../types/shop.types';
 import { RootState } from '../../store/store';
@@ -11,9 +11,8 @@ import Button from '../../components/ui/Button/Button';
 import ShopService from '../../services/shop.service';
 
 const Home: React.FC = () => {
-  const dispatch = useDispatch();
   const { location, getLocation } = useGeolocation();
-  const { user, isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const [popularShops, setPopularShops] = useState<Shop[]>([]);
   const [nearbyShops, setNearbyShops] = useState<Shop[]>([]);
   const [isLoading, setIsLoading] = useState(true);

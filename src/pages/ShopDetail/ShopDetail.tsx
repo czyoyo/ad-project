@@ -1,4 +1,3 @@
-// src/pages/ShopDetail/ShopDetail.tsx
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -287,7 +286,13 @@ const ShopDetail: React.FC = () => {
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
                   매장 특징
                 </h2>
-                <ShopFeaturesList features={shop.features} />
+                <ShopFeaturesList
+                  features={Object.entries(shop.features).map(([name, value]) => ({
+                    name,
+                    value,
+                    icon: undefined,
+                  }))}
+                />
               </section>
             </div>
 
@@ -296,7 +301,10 @@ const ShopDetail: React.FC = () => {
               {/* 지도 */}
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
                 <ShopMap
-                  location={shop.location}
+                  location={{
+                    lat: shop.location.latitude,
+                    lng: shop.location.longitude,
+                  }}
                   address={shop.address.formattedAddress}
                   shopName={shop.name}
                 />
