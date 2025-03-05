@@ -107,7 +107,7 @@ const authSlice = createSlice({
     // 토큰 설정
     setToken(state, action: PayloadAction<string>) {
       state.token = action.payload;
-      authStorage.setToken(action.payload);
+      authStorage.setStorageToken(action.payload);
     },
 
     // 로딩 상태 설정
