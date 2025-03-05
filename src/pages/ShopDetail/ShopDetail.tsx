@@ -65,7 +65,7 @@ const ShopDetail: React.FC = () => {
       | 'id'
       | 'shopId'
       | 'userId'
-      | 'userName'
+      | 'nickname'
       | 'userImage'
       | 'createdAt'
       | 'updatedAt'

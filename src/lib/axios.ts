@@ -26,7 +26,7 @@ const axiosInstance: AxiosInstance = axios.create(config);
 axiosInstance.interceptors.request.use(
   async (config) => {
     // 토큰이 있으면 헤더에 추가
-    const token = authStorage.getToken();
+    const token = authStorage.getStorageToken();
     if (token) {
       config.headers = config.headers || {};
       config.headers.Authorization = `Bearer ${token}`;

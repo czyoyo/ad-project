@@ -80,8 +80,8 @@ interface AuthState {
 // 초기 상태
 const initialState: AuthState = {
   user: userStorage.getUserInfo(),
-  token: authStorage.getToken(),
-  isAuthenticated: !!authStorage.getToken() && !AuthService.isTokenExpired(),
+  token: authStorage.getStorageToken(),
+  isAuthenticated: !!authStorage.getStorageToken() && !AuthService.isTokenExpired(),
   isLoading: false,
   error: null,
   isInitialized: false,

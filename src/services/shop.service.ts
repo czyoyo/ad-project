@@ -5,7 +5,7 @@ import { ApiResponse } from '../types/api.types';
 /**
  * 상점 관련 서비스
  */
-export class ShopService {
+class ShopService {
   private API_URL = '/shops';
 
   /**
@@ -96,7 +96,7 @@ export class ShopService {
       | 'id'
       | 'shopId'
       | 'userId'
-      | 'userName'
+      | 'nickname'
       | 'userImage'
       | 'createdAt'
       | 'updatedAt'

@@ -29,7 +29,7 @@ class AnalyticsService {
   identifyUser(user: User): void {
     analytics.identifyUser(user.id, {
       email: user.email,
-      username: user.username,
+      nickname: user.nickname,
       role: user.role,
       created_at: user.createdAt,
     });

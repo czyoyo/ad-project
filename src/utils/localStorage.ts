@@ -16,32 +16,32 @@ const FILTER_PREFERENCES_KEY = 'filter_preferences';
  */
 export const authStorage = {
   // 토큰 저장
-  setToken(token: string): void {
+  setStorageToken(token: string): void {
     localStorage.setItem(TOKEN_KEY, token);
   },
 
   // 토큰 가져오기
-  getToken(): string | null {
+  getStorageToken(): string | null {
     return localStorage.getItem(TOKEN_KEY);
   },
 
   // 토큰 제거
-  removeToken(): void {
+  removeStorageToken(): void {
     localStorage.removeItem(TOKEN_KEY);
   },
 
   // 리프레시 토큰 저장
-  setRefreshToken(token: string): void {
+  setStorageRefreshToken(token: string): void {
     localStorage.setItem(REFRESH_TOKEN_KEY, token);
   },
 
   // 리프레시 토큰 가져오기
-  getRefreshToken(): string | null {
+  getStorageRefreshToken(): string | null {
     return localStorage.getItem(REFRESH_TOKEN_KEY);
   },
 
   // 리프레시 토큰 제거
-  removeRefreshToken(): void {
+  removeStorageRefreshToken(): void {
     localStorage.removeItem(REFRESH_TOKEN_KEY);
   },
 

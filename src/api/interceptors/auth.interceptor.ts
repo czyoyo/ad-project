@@ -12,7 +12,7 @@ export const authInterceptor = (config: InternalAxiosRequestConfig): InternalAxi
   store.dispatch(setAuthLoading(true));
 
   // localStorage에서 토큰 가져오기
-  const token = authStorage.getToken();
+  const token = authStorage.getStorageToken();
 
   // 토큰이 존재하는 경우 Authorization 헤더에 추가
   if (token) {

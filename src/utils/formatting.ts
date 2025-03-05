@@ -66,18 +66,18 @@ export function formatPhoneNumber(phoneNumber: string): string {
 export function maskEmail(email: string): string {
   if (!email || !email.includes('@')) return email;
 
-  const [username, domain] = email.split('@');
+  const [nickname, domain] = email.split('@');
 
   // 사용자 이름이 짧은 경우 처리
-  if (username.length <= 1) {
-    return `${username}***@${domain}`;
+  if (nickname.length <= 1) {
+    return `${nickname}***@${domain}`;
   }
 
   // 첫 글자만 표시하고 나머지는 별표로 마스킹
-  const firstChar = username.charAt(0);
-  const maskedUsername = `${firstChar}${'*'.repeat(username.length - 1)}`;
+  const firstChar = nickname.charAt(0);
+  const maskedNickname = `${firstChar}${'*'.repeat(nickname.length - 1)}`;
 
-  return `${maskedUsername}@${domain}`;
+  return `${maskedNickname}@${domain}`;
 }
 
 /**

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback, RefObject } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store/store';
+import { RootState } from './store.ts';
 import { ShopFilter } from '../types/shop.types';
 
 /**
@@ -9,7 +9,10 @@ import { ShopFilter } from '../types/shop.types';
  * @param key 저장소 키
  * @param initialValue 초기값
  */
-export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
+export function useLocalStorage<T>(
+  key: string,
+  initialValue: T,
+): [T, (value: T | ((prevValue: T) => T)) => void] {
   // 상태 초기화 함수
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
@@ -22,7 +25,7 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T)
   });
 
   // localStorage에 값 저장
-  const setValue = (value: T) => {
+  const setValue = (value: T | ((prevValue: T) => T)) => {
     try {
       // 함수 형태로 값 업데이트 지원
       const valueToStore = value instanceof Function ? value(storedValue) : value;
@@ -230,12 +233,12 @@ export function useDebounce<T>(value: T, delay: number = 500): T {
  * @param callback 스로틀할 콜백 함수
  * @param delay 지연 시간 (ms)
  */
-export function useThrottle<T extends (...args: any[]) => any>(
+export function useThrottle<T extends (...args: unknown[]) => unknown>(
   callback: T,
   delay: number = 200,
 ): (...args: Parameters<T>) => void {
   const lastExecuted = useRef<number>(0);
-  const timeoutId = useRef<NodeJS.Timeout | null>(null);
+  const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   return useCallback(
     (...args: Parameters<T>) => {
@@ -325,7 +328,7 @@ export function useShopFilter() {
  * @param value 현재 값
  */
 export function usePrevious<T>(value: T): T | undefined {
-  const ref = useRef<T>();
+  const ref = useRef<T | undefined>(undefined);
 
   useEffect(() => {
     ref.current = value;
@@ -374,7 +377,7 @@ export function useDarkMode() {
 
   // 테마 토글 함수
   const toggleTheme = useCallback(() => {
-    setTheme((prev) => {
+    setTheme((prev: 'light' | 'dark' | 'system') => {
       if (prev === 'light') return 'dark';
       if (prev === 'dark') return 'system';
       return 'light';
@@ -478,7 +481,7 @@ export function useAuth() {
         // API 호출 (Redux Thunk로 처리)
         await dispatch({ type: 'auth/login', payload: { email, password } });
         return true;
-      } catch (error) {
+      } catch (_error) {
         return false;
       }
     },
@@ -492,14 +495,22 @@ export function useAuth() {
   }, [dispatch, navigate]);
 
   // 회원가입
+  // 회원가입 데이터를 위한 구체적인 타입 정의 -> 이거 나중에 인터페이스 찾아서 대체해야함
+  type RegisterUserData = {
+    email: string;
+    password: string;
+    nickname: string;
+    // 추가 필드를 위한 인덱스 시그니처
+    [key: string]: string | number | boolean;
+  };
   const register = useCallback(
-    async (userData: any) => {
+    async (userData: RegisterUserData) => {
       try {
         dispatch({ type: 'auth/register/pending' });
         // API 호출 (Redux Thunk로 처리)
         await dispatch({ type: 'auth/register', payload: userData });
         return true;
-      } catch (error) {
+      } catch (_error) {
         return false;
       }
     },

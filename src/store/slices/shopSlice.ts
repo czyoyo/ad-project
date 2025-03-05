@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Shop, ShopFilter } from '../../types/shop.types.ts';
+import shopService from '../../services/shop.service.ts';
 
 // 비동기 액션 생성
 export const fetchShops = createAsyncThunk(
   'shop/fetchShops',
   async (filters: ShopFilter, { rejectWithValue }) => {
     try {
-      const shopService = new ShopService();
       return await shopService.getShops(filters);
     } catch (error) {
       return rejectWithValue(
@@ -20,7 +20,6 @@ export const fetchShopById = createAsyncThunk(
   'shop/fetchShopById',
   async (shopId: string, { rejectWithValue }) => {
     try {
-      const shopService = new ShopService();
       return await shopService.getShopById(shopId);
     } catch (error) {
       return rejectWithValue(
@@ -34,7 +33,6 @@ export const addFavoriteShop = createAsyncThunk(
   'shop/addFavorite',
   async (shopId: string, { rejectWithValue }) => {
     try {
-      const shopService = new ShopService();
       await shopService.addFavorite(shopId);
       return shopId;
     } catch (error) {
@@ -49,7 +47,6 @@ export const removeFavoriteShop = createAsyncThunk(
   'shop/removeFavorite',
   async (shopId: string, { rejectWithValue }) => {
     try {
-      const shopService = new ShopService();
       await shopService.removeFavorite(shopId);
       return shopId;
     } catch (error) {

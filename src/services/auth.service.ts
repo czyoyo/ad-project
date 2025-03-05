@@ -28,7 +28,7 @@ export class AuthService {
       }
 
       if (data.refreshToken) {
-        authStorage.setRefreshToken(data.refreshToken);
+        authStorage.setStorageRefreshToken(data.refreshToken);
       }
 
       // 사용자 정보 저장
@@ -59,7 +59,7 @@ export class AuthService {
       }
 
       if (data.refreshToken) {
-        authStorage.setRefreshToken(data.refreshToken);
+        authStorage.setStorageRefreshToken(data.refreshToken);
       }
 
       // 사용자 정보 저장
@@ -86,7 +86,7 @@ export class AuthService {
    */
   async refreshToken(): Promise<{ token: string; refreshToken?: string }> {
     try {
-      const refreshToken = authStorage.getRefreshToken();
+      const refreshToken = authStorage.getStorageRefreshToken();
 
       if (!refreshToken) {
         throw new Error('리프레시 토큰이 없습니다.');
@@ -105,7 +105,7 @@ export class AuthService {
       }
 
       if (data.refreshToken) {
-        authStorage.setRefreshToken(data.refreshToken);
+        authStorage.setStorageRefreshToken(data.refreshToken);
       }
 
       return data;
@@ -207,7 +207,7 @@ export class AuthService {
    * 현재 토큰의 만료 시간 확인
    */
   isTokenExpired(): boolean {
-    const token = authStorage.getToken();
+    const token = authStorage.getStorageToken();
 
     if (!token) {
       return true;
@@ -228,7 +228,7 @@ export class AuthService {
    * 사용자가 인증되어 있는지 확인
    */
   isAuthenticated(): boolean {
-    return !!authStorage.getToken() && !this.isTokenExpired();
+    return !!authStorage.getStorageToken() && !this.isTokenExpired();
   }
 }
 

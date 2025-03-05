@@ -47,7 +47,7 @@ export const useAuth = () => {
 
           // 리프레시 토큰이 있다면 저장
           if (data.refreshToken) {
-            authStorage.setRefreshToken(data.refreshToken);
+            authStorage.setStorageRefreshToken(data.refreshToken);
           }
 
           // Redux 상태 업데이트
@@ -99,7 +99,7 @@ export const useAuth = () => {
 
           // 리프레시 토큰이 있다면 저장
           if (data.refreshToken) {
-            authStorage.setRefreshToken(data.refreshToken);
+            authStorage.setStorageRefreshToken(data.refreshToken);
           }
 
           // Redux 상태 업데이트

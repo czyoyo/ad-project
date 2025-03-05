@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Category } from '../../types/shop.types.ts';
+import categoryService from '../../services/category.service';
 
 // 비동기 액션 생성
 export const fetchCategories = createAsyncThunk(
   'categories/fetchCategories',
   async (_, { rejectWithValue }) => {
     try {
-      const categoryService = new CategoryService();
       return await categoryService.getCategories();
     } catch (error) {
       return rejectWithValue(

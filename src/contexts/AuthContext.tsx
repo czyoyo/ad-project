@@ -22,19 +22,19 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children: ReactNode;
 }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [token, setTokenState] = useState<string | null>(authStorage.getToken());
+  const [token, setTokenState] = useState<string | null>(authStorage.getStorageToken());
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const initAuth = async () => {
-      const storedToken = authStorage.getToken();
+      const storedToken = authStorage.getStorageToken();
       if (storedToken) {
         try {
           const userData = await authService.getCurrentUser();
           setUser(userData);
         } catch (error) {
           console.error('Failed to fetch user data', error);
-          authStorage.removeToken();
+          authStorage.removeStorageToken();
           setTokenState(null);
         }
       }
@@ -72,7 +72,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const logout = () => {
     setUser(null);
     setTokenState(null);
-    authStorage.removeToken();
+    authStorage.removeStorageToken();
   };
 
   const refreshToken = async (): Promise<void> => {

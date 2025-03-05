@@ -35,7 +35,7 @@ baseApi.interceptors.request.use(
     // store.dispatch({ type: 'ui/setLoading', payload: true });
 
     // 인증 토큰 가져오기
-    const token = authStorage.getToken();
+    const token = authStorage.getStorageToken();
 
     // 헤더에 인증 토큰 추가
     if (token) {
@@ -72,7 +72,7 @@ baseApi.interceptors.response.use(
         originalRequest._retry = true;
 
         // 토큰 갱신 시도
-        const refreshToken = authStorage.getRefreshToken();
+        const refreshToken = authStorage.getStorageRefreshToken();
         if (refreshToken) {
           const refreshResult = await AuthService.refreshToken();
 
