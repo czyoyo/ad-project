@@ -1,10 +1,14 @@
 import axiosInstance from '../api/base.api';
 import { User, RegisterData, AuthResponse, PasswordChangeData } from '../types/user.types';
 import { authStorage, userStorage } from '../utils/localStorage';
-
+import { JwtPayload, jwtDecode } from 'jwt-decode';
 /**
  * 인증 관련 서비스
  */
+interface DecodedToken extends JwtPayload {
+  exp: number;
+}
+
 export class AuthService {
   private API_URL = '/auth';
 
@@ -24,7 +28,7 @@ export class AuthService {
 
       // 토큰 저장
       if (data.token) {
-        authStorage.setToken(data.token);
+        authStorage.setStorageToken(data.token);
       }
 
       if (data.refreshToken) {
@@ -55,7 +59,7 @@ export class AuthService {
 
       // 토큰 저장
       if (data.token) {
-        authStorage.setToken(data.token);
+        authStorage.setStorageToken(data.token);
       }
 
       if (data.refreshToken) {
@@ -101,7 +105,7 @@ export class AuthService {
 
       // 새 토큰 저장
       if (data.token) {
-        authStorage.setToken(data.token);
+        authStorage.setStorageToken(data.token);
       }
 
       if (data.refreshToken) {
@@ -214,7 +218,7 @@ export class AuthService {
     }
 
     try {
-      const decoded: any = jwt_decode(token);
+      const decoded: DecodedToken = jwtDecode<DecodedToken>(token);
       const currentTime = Date.now() / 1000;
 
       return decoded.exp < currentTime;

@@ -238,7 +238,7 @@ class GeolocationService {
     longitude: number,
     radiusInKm: number,
   ): { minLat: number; maxLat: number; minLng: number; maxLng: number } {
-    const R = 6371; // 지구 반경 (km)
+    // const R = 6371; // 지구 반경 (km)
 
     // 위도 1도당 거리 (km)
     const latKm = 111;
@@ -294,7 +294,7 @@ class GeolocationService {
    * @param address 주소 문자열
    * @returns 위도, 경도 좌표 (비동기)
    */
-  async geocode(address: string): Promise<GeolocationPosition | null> {
+  async geocode(_address: string): Promise<GeolocationPosition | null> {
     try {
       // 구현 예시: 실제로는 Google Maps Geocoding API 등을 사용해야 합니다.
       // const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${env.GOOGLE_MAPS_API_KEY}`);
