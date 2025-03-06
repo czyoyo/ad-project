@@ -43,7 +43,7 @@ export const useAuth = () => {
 
         if (data && data.token) {
           // 토큰 저장
-          authStorage.setToken(data.token);
+          authStorage.setStorageToken(data.token);
 
           // 리프레시 토큰이 있다면 저장
           if (data.refreshToken) {
@@ -95,7 +95,7 @@ export const useAuth = () => {
 
         if (data && data.token) {
           // 토큰 저장
-          authStorage.setToken(data.token);
+          authStorage.setStorageToken(data.token);
 
           // 리프레시 토큰이 있다면 저장
           if (data.refreshToken) {
