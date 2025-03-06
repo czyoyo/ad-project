@@ -1,4 +1,3 @@
-// src/api/index.ts
 import { CustomAxiosRequestConfig } from '../types/api.types';
 import axios, { AxiosInstance, AxiosResponse, AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { authStorage } from '../utils/localStorage';

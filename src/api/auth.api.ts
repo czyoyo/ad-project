@@ -1,5 +1,3 @@
-// src/api/auth.api.ts
-
 import baseApi from './index';
 import { LoginCredentials, RegisterData, User, AuthResponse } from '../types/user.types';
 import { ApiResponse } from '../types/api.types';

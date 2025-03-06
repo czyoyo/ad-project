@@ -58,7 +58,7 @@ export const store = configureStore({
         // redux-persist 액션 직렬화 검사 제외
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         // 직렬화할 수 없는 값이 있는 경로 무시
-        ignoredPaths: ['auth.user.someNonSerializableProperty'],
+        ignoredPaths: ['auth.user.someNonSerializableProperty'], // 직렬화 불가능 해도 무시하고 저장 가능
       },
     }),
 });
