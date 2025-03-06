@@ -79,7 +79,8 @@ const initialState: AuthState = {
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: 'auth', // 액션 타입의 접두사(prefix)를 생성, ex) const loginAction = { type: 'auth/login', payload: { username: 'user1' } };
+
   initialState,
   reducers: {
     setUser(state, action: PayloadAction<User>) {
