@@ -1,9 +1,6 @@
 import './App.css';
 import { Provider } from 'react-redux';
 import { store, persistor } from './store/store.ts'; // 🔥 persistor 추가 임포트
-import { AuthProvider } from './contexts/AuthContext';
-import { ThemeProvider } from './contexts/ThemeContext';
-import { ToastProvider } from './contexts/ToastContext';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { JSX } from 'react';
 import AppRoutes from './routes';
@@ -13,15 +10,9 @@ function App(): JSX.Element {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <AuthProvider>
-          <ThemeProvider>
-            <ToastProvider>
-              <Router>
-                <AppRoutes />
-              </Router>
-            </ToastProvider>
-          </ThemeProvider>
-        </AuthProvider>
+        <Router>
+          <AppRoutes />
+        </Router>
       </PersistGate>
     </Provider>
   );

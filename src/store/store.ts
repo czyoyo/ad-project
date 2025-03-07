@@ -19,16 +19,16 @@ import {
 
 // persist 설정 - 사용자 인증 정보 유지
 const authPersistConfig = {
-  key: 'auth',
-  storage,
-  whitelist: ['token', 'user', 'isAuthenticated'], // 이 상태들만 유지
+  key: 'auth', // 브라우저 스토리지에 데이터를 저장할 때 사용하는 키 이름입니다. ex) localStorage에 'persist:auth'라는 키로 데이터가 저장됩니다
+  storage, // 스토리지 엔진
+  whitelist: ['token', 'user', 'isAuthenticated'], // 이 상태들만 화이트리스트로 저장, 유지
 };
 
 // persist 설정 - UI 설정 유지
 const uiPersistConfig = {
   key: 'ui',
   storage,
-  whitelist: ['isDarkMode', 'viewMode', 'itemsPerPage', 'isPageLoading'], // 이 설정들만 유지
+  whitelist: ['isDarkMode', 'viewMode', 'itemsPerPage', 'isPageLoading'],
 };
 
 // persist 설정 - 사용자 즐겨찾기 유지
@@ -40,7 +40,8 @@ const shopPersistConfig = {
 
 // 루트 리듀서 설정
 const rootReducer = combineReducers({
-  auth: persistReducer(authPersistConfig, authReducer),
+  // 사용 예는 ex) const user = useSelector(state => state.auth.user);
+  auth: persistReducer(authPersistConfig, authReducer), // Redux 상태 트리에서 해당 리듀서가 관리하는 부분의 경로이며 상태에 접근할 때 사용. 예: state.auth.user
   ui: persistReducer(uiPersistConfig, uiReducer),
   shop: persistReducer(shopPersistConfig, shopReducer),
   categories: categoriesReducer, // 이 데이터는 유지할 필요 없음
@@ -57,7 +58,7 @@ export const store = configureStore({
         // redux-persist 액션 직렬화 검사 제외
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         // 직렬화할 수 없는 값이 있는 경로 무시
-        ignoredPaths: ['auth.user.someNonSerializableProperty'],
+        ignoredPaths: ['auth.user.someNonSerializableProperty'], // 직렬화 불가능 해도 무시하고 저장 가능
       },
     }),
 });

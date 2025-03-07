@@ -50,7 +50,7 @@ function Login(): JSX.Element {
 
   // 로그인 제출 핸들러
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+    e.preventDefault(); // 기본 제출 이벤트 방지
 
     if (!validateForm()) return;
 
