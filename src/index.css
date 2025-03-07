@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/*전역 스타일 (루트 요소를 선택), Html 적용*/
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -15,15 +16,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/*전역 링크들*/
 a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
+/*전역 링크 마우스 올렸을때*/
 a:hover {
   color: #535bf2;
 }
 
+/*전역 바디*/
 body {
   margin: 0;
   display: flex;
@@ -32,11 +36,13 @@ body {
   min-height: 100vh;
 }
 
+/*전역 h1*/
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
 
+/*전역 버튼*/
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -56,6 +62,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/*전역 라이트모드*/
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

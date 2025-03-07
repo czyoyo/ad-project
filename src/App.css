@@ -12,10 +12,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #4a9fffaa); /* 파란색 그림자로 변경 */
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #4a9fffaa); /* React 로고도 파란색 그림자로 통일 */
 }
 
 @keyframes logo-spin {
@@ -35,8 +35,12 @@
 
 .card {
   padding: 2em;
+  background-color: #162a56; /* 카드 배경색을 약간 밝은 파란색으로 */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-top: 1.5em;
 }
 
 .read-the-docs {
-  color: #888;
+  color: #a3c6ff; /* 연한 파란색으로 변경 */
 }
