@@ -8,7 +8,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #0f1b3b; /* 어두운 파란색 배경으로 변경 */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,12 +19,12 @@
 /*전역 링크들*/
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #4a9fff; /* 파란색 링크로 변경 */
   text-decoration: inherit;
 }
 /*전역 링크 마우스 올렸을때*/
 a:hover {
-  color: #535bf2;
+  color: #80bcff; /* 호버 시 밝은 파란색으로 변경 */
 }
 
 /*전역 바디*/
@@ -34,12 +34,14 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #0f1b3b; /* 어두운 파란색 배경으로 변경 */
 }
 
 /*전역 h1*/
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: #ffffff; /* 흰색 제목으로 더 선명하게 */
 }
 
 /*전역 버튼*/
@@ -50,28 +52,45 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #1e3a8a; /* 진한 파란색 버튼 */
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: #2563eb; /* 호버 시 더 밝은 파란색 */
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-/*전역 라이트모드*/
-@media (prefers-color-scheme: light) {
+
+/* 다크 모드에서도 일관된 파란색 테마 유지 */
+@media (prefers-color-scheme: dark) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #0f1b3b;
   }
   a:hover {
-    color: #747bff;
+    color: #80bcff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #1e3a8a;
   }
 }
+
+/* 라이트 모드에서도 파란색 테마 유지 */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #ffffff;
+    background-color: #0f1b3b;
+  }
+  a:hover {
+    color: #80bcff;
+  }
+  button {
+    background-color: #1e3a8a;
+    color: white;
+  }
+}
+
