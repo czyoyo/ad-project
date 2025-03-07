@@ -13,7 +13,7 @@ function AuthLayout(): JSX.Element {
   const { isPageLoading } = useSelector((state: RootState) => state.ui);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen flex flex-col bg-gray-50 dark:dark:bg-purple-950">
       {/* 간소화된 헤더 */}
       <header className="py-4 px-6 bg-white dark:bg-gray-800 shadow">
         <div className="container mx-auto flex justify-between items-center">

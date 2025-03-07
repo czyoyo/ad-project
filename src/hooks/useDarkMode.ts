@@ -3,7 +3,7 @@ import { RootState } from '../store/store';
 import { setDarkMode, toggleDarkMode } from '../store/slices/uiSlice.ts';
 import { useEffect } from 'react';
 
-export const useDarkMode = () => {
+const useDarkMode = () => {
   const dispatch = useDispatch();
   // useSelector 훅을 사용하여 isDarkMode 상태를 가져옴
   const isDarkMode = useSelector((state: RootState) => state.ui.isDarkMode);
@@ -57,3 +57,5 @@ export const useDarkMode = () => {
 
   return { isDarkMode, toggleTheme };
 };
+
+export default useDarkMode;

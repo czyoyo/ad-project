@@ -1,96 +1,87 @@
 @import "tailwindcss";
 
-/*전역 스타일 (루트 요소를 선택), Html 적용*/
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* 기본 스타일 설정 */
+/*@layer base {*/
+/*  !* 기본 폰트 설정 등 *!*/
+/*  html {*/
+/*    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;*/
+/*    line-height: 1.5;*/
+/*    font-weight: 400;*/
+/*    font-synthesis: none;*/
+/*    text-rendering: optimizeLegibility;*/
+/*    -webkit-font-smoothing: antialiased;*/
+/*    -moz-osx-font-smoothing: grayscale;*/
+/*    transition: background-color 0.3s ease, color 0.3s ease;*/
+/*  }*/
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #0f1b3b; /* 어두운 파란색 배경으로 변경 */
+/*  !* 라이트 모드(기본) 설정 *!*/
+/*  :root {*/
+/*    --color-primary: #2563eb;*/
+/*    --color-primary-light: #4a9fff;*/
+/*    --color-primary-hover: #80bcff;*/
+/*    --color-bg: #ffffff;*/
+/*    --color-text: #1e293b;*/
+/*  }*/
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+/*  !* 다크 모드 설정 - Tailwind 클래스 기반 다크모드와 호환성 유지 *!*/
+/*  .dark {*/
+/*    --color-primary: #1e3a8a;*/
+/*    --color-primary-light: #3b82f6;*/
+/*    --color-primary-hover: #60a5fa;*/
+/*    --color-bg: #0f1b3b;*/
+/*    --color-text: rgba(255, 255, 255, 0.87);*/
+/*  }*/
 
-/*전역 링크들*/
-a {
-  font-weight: 500;
-  color: #4a9fff; /* 파란색 링크로 변경 */
-  text-decoration: inherit;
-}
-/*전역 링크 마우스 올렸을때*/
-a:hover {
-  color: #80bcff; /* 호버 시 밝은 파란색으로 변경 */
-}
+/*  !* 베이스 스타일 적용 *!*/
+/*  body {*/
+/*    margin: 0;*/
+/*    min-width: 320px;*/
+/*    min-height: 100vh;*/
+/*    background-color: var(--color-bg);*/
+/*    color: var(--color-text);*/
+/*  }*/
 
-/*전역 바디*/
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: #0f1b3b; /* 어두운 파란색 배경으로 변경 */
-}
+/*  a {*/
+/*    font-weight: 500;*/
+/*    color: var(--color-primary-light);*/
+/*    text-decoration: inherit;*/
+/*  }*/
 
-/*전역 h1*/
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  color: #ffffff; /* 흰색 제목으로 더 선명하게 */
-}
+/*  a:hover {*/
+/*    color: var(--color-primary-hover);*/
+/*  }*/
 
-/*전역 버튼*/
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1e3a8a; /* 진한 파란색 버튼 */
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  background-color: #2563eb; /* 호버 시 더 밝은 파란색 */
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+/*  h1 {*/
+/*    font-size: 3.2em;*/
+/*    line-height: 1.1;*/
+/*  }*/
 
+/*  button {*/
+/*    border-radius: 8px;*/
+/*    border: 1px solid transparent;*/
+/*    padding: 0.6em 1.2em;*/
+/*    font-size: 1em;*/
+/*    font-weight: 500;*/
+/*    font-family: inherit;*/
+/*    background-color: var(--color-primary);*/
+/*    color: white;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.25s, border-color 0.25s;*/
+/*  }*/
 
-/* 다크 모드에서도 일관된 파란색 테마 유지 */
-@media (prefers-color-scheme: dark) {
-  :root {
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #0f1b3b;
-  }
-  a:hover {
-    color: #80bcff;
-  }
-  button {
-    background-color: #1e3a8a;
-  }
-}
+/*  button:hover {*/
+/*    background-color: var(--color-primary-light);*/
+/*  }*/
 
-/* 라이트 모드에서도 파란색 테마 유지 */
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #ffffff;
-    background-color: #0f1b3b;
-  }
-  a:hover {
-    color: #80bcff;
-  }
-  button {
-    background-color: #1e3a8a;
-    color: white;
-  }
-}
+/*  button:focus,*/
+/*  button:focus-visible {*/
+/*    outline: 4px auto -webkit-focus-ring-color;*/
+/*  }*/
+/*}*/
 
+/*!* 트랜지션 효과 *!*/
+/*@layer utilities {*/
+/*  .transition-theme {*/
+/*    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;*/
+/*  }*/
+/*}*/

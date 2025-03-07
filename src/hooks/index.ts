@@ -7,6 +7,7 @@ import useGeolocation from './useGeolocation';
 import useDebounce from './useDebounce';
 import useFavorites from './useFavorites.ts';
 import useShopFilter from './useShopFilter.ts';
+import useDarkMode from './useDarkMode.ts';
 
 export {
   useAuth,
@@ -18,4 +19,5 @@ export {
   useDebounce,
   useFavorites,
   useShopFilter,
+  useDarkMode,
 };
