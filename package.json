@@ -11,12 +11,10 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.6.0",
-    "@tailwindcss/postcss": "^4.0.12",
     "@tailwindcss/vite": "^4.0.9",
     "axios": "^1.8.1",
     "date-fns": "^4.1.0",
     "jwt-decode": "^4.0.0",
-    "postcss": "^8.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
