@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
 
 /* 기본 스타일 설정 */
 @layer base {

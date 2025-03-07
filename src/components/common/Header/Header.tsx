@@ -62,6 +62,7 @@ function Header(): JSX.Element {
               </span>
             </Link>
           </div>
+
           <div className="p-4 bg-white dark:bg-purple-950 text-black dark:text-white">
             이 텍스트는 다크모드에서 색상이 변경됩니다.
           </div>
