@@ -1,87 +1,88 @@
 @import "tailwindcss";
 
 /* 기본 스타일 설정 */
-/*@layer base {*/
-/*  !* 기본 폰트 설정 등 *!*/
-/*  html {*/
-/*    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;*/
-/*    line-height: 1.5;*/
-/*    font-weight: 400;*/
-/*    font-synthesis: none;*/
-/*    text-rendering: optimizeLegibility;*/
-/*    -webkit-font-smoothing: antialiased;*/
-/*    -moz-osx-font-smoothing: grayscale;*/
-/*    transition: background-color 0.3s ease, color 0.3s ease;*/
-/*  }*/
+@layer base {
+   /*기본 폰트 설정 등*/
+  html {
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
 
-/*  !* 라이트 모드(기본) 설정 *!*/
-/*  :root {*/
-/*    --color-primary: #2563eb;*/
-/*    --color-primary-light: #4a9fff;*/
-/*    --color-primary-hover: #80bcff;*/
-/*    --color-bg: #ffffff;*/
-/*    --color-text: #1e293b;*/
-/*  }*/
+  /* 라이트 모드(기본) 설정 */
+  :root {
+    --color-primary: #2563eb;
+    --color-primary-light: #4a9fff;
+    --color-primary-hover: #80bcff;
+    --color-bg: #ffffff;
+    --color-text: #1e293b;
+  }
 
-/*  !* 다크 모드 설정 - Tailwind 클래스 기반 다크모드와 호환성 유지 *!*/
-/*  .dark {*/
-/*    --color-primary: #1e3a8a;*/
-/*    --color-primary-light: #3b82f6;*/
-/*    --color-primary-hover: #60a5fa;*/
-/*    --color-bg: #0f1b3b;*/
-/*    --color-text: rgba(255, 255, 255, 0.87);*/
-/*  }*/
+  /* 다크 모드 설정 - Tailwind 클래스 기반 다크모드와 호환성 유지 */
+  .dark {
+      color-scheme: dark;
+    --color-primary: #1e3a8a;
+    --color-primary-light: #3b82f6;
+    --color-primary-hover: #60a5fa;
+    --color-bg: #0f1b3b;
+    --color-text: rgba(255, 255, 255, 0.87);
+  }
 
-/*  !* 베이스 스타일 적용 *!*/
-/*  body {*/
-/*    margin: 0;*/
-/*    min-width: 320px;*/
-/*    min-height: 100vh;*/
-/*    background-color: var(--color-bg);*/
-/*    color: var(--color-text);*/
-/*  }*/
+  /* 베이스 스타일 적용 */
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
 
-/*  a {*/
-/*    font-weight: 500;*/
-/*    color: var(--color-primary-light);*/
-/*    text-decoration: inherit;*/
-/*  }*/
+  a {
+    font-weight: 500;
+    color: var(--color-primary-light);
+    text-decoration: inherit;
+  }
 
-/*  a:hover {*/
-/*    color: var(--color-primary-hover);*/
-/*  }*/
+  a:hover {
+    color: var(--color-primary-hover);
+  }
 
-/*  h1 {*/
-/*    font-size: 3.2em;*/
-/*    line-height: 1.1;*/
-/*  }*/
+  h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+  }
 
-/*  button {*/
-/*    border-radius: 8px;*/
-/*    border: 1px solid transparent;*/
-/*    padding: 0.6em 1.2em;*/
-/*    font-size: 1em;*/
-/*    font-weight: 500;*/
-/*    font-family: inherit;*/
-/*    background-color: var(--color-primary);*/
-/*    color: white;*/
-/*    cursor: pointer;*/
-/*    transition: background-color 0.25s, border-color 0.25s;*/
-/*  }*/
+  button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: var(--color-primary);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.25s, border-color 0.25s;
+  }
 
-/*  button:hover {*/
-/*    background-color: var(--color-primary-light);*/
-/*  }*/
+  button:hover {
+    background-color: var(--color-primary-light);
+  }
 
-/*  button:focus,*/
-/*  button:focus-visible {*/
-/*    outline: 4px auto -webkit-focus-ring-color;*/
-/*  }*/
-/*}*/
+  button:focus,
+  button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+}
 
-/*!* 트랜지션 효과 *!*/
-/*@layer utilities {*/
-/*  .transition-theme {*/
-/*    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;*/
-/*  }*/
-/*}*/
+/* 트랜지션 효과 */
+@layer utilities {
+  .transition-theme {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+}
