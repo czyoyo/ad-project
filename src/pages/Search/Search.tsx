@@ -1,10 +1,9 @@
-// src/pages/Search/Search.tsx
 import { JSX, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Shop, ShopFilter } from '../../types/shop.types';
 import { RootState } from '../../store/store';
-import { useShopFilter, useGeolocation, useDebounce } from '../../hooks';
+import { useShopFilter, useDebounce } from '../../hooks';
 import ShopService from '../../services/shop.service';
 import ShopCard from '../../components/shop/ShopCard/ShopCard';
 import SearchFilters from '../../components/shop/SearchFilters/SearchFilters';
@@ -14,7 +13,6 @@ function Search(): JSX.Element {
   const location = useLocation();
   const dispatch = useDispatch();
   const { applyFilter, resetFilters } = useShopFilter();
-  const { location: userLocation, getLocation } = useGeolocation();
   const searchFilters = useSelector((state: RootState) => state.shop.filters);
 
   const [shops, setShops] = useState<Shop[]>([]);
@@ -108,18 +106,6 @@ function Search(): JSX.Element {
     }
   };
 
-  // 위치 기반 검색
-  const handleLocationSearch = () => {
-    getLocation();
-    if (userLocation) {
-      applyFilter({
-        latitude: userLocation.latitude,
-        longitude: userLocation.longitude,
-        distance: 5, // 5km 반경
-      });
-    }
-  };
-
   // 필터 초기화
   const handleResetFilters = () => {
     resetFilters();
@@ -158,29 +144,6 @@ function Search(): JSX.Element {
               />
             </svg>
             필터
-          </Button>
-          <Button variant="outline" size="sm" onClick={handleLocationSearch}>
-            <svg
-              className="w-4 h-4 mr-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-            </svg>
-            내 주변
           </Button>
           <Button variant="outline" size="sm" onClick={handleResetFilters}>
             초기화
@@ -232,9 +195,6 @@ function Search(): JSX.Element {
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button variant="outline" onClick={handleResetFilters}>
               필터 초기화
-            </Button>
-            <Button variant="primary" onClick={handleLocationSearch}>
-              내 주변 상점 찾기
             </Button>
           </div>
         </div>

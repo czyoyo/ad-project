@@ -1,20 +1,16 @@
-// src/pages/Home/Home.tsx
 import { JSX, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Shop } from '../../types/shop.types';
 import { RootState } from '../../store/store';
-import { useGeolocation } from '../../hooks';
 import ShopCard from '../../components/shop/ShopCard/ShopCard';
 import CategoryList from '../../components/shop/CategoryList/CategoryList';
 import Button from '../../components/ui/Button/Button';
 import ShopService from '../../services/shop.service';
 
 function Home(): JSX.Element {
-  const { location, getLocation } = useGeolocation();
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const [popularShops, setPopularShops] = useState<Shop[]>([]);
-  const [nearbyShops, setNearbyShops] = useState<Shop[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -24,17 +20,6 @@ function Home(): JSX.Element {
         // 인기 상점 가져오기
         const popular = await ShopService.getPopularShops(8);
         setPopularShops(popular);
-
-        // 사용자 위치가 있는 경우 근처 상점 가져오기
-        if (location) {
-          const nearby = await ShopService.getNearbyShops(
-            location.latitude,
-            location.longitude,
-            5,
-            8,
-          );
-          setNearbyShops(nearby);
-        }
       } catch (error) {
         console.error('Error fetching home page data:', error);
       } finally {
@@ -43,12 +28,7 @@ function Home(): JSX.Element {
     };
 
     fetchInitialData();
-  }, [location]);
-
-  // 위치 정보 접근 요청
-  const handleLocationRequest = () => {
-    getLocation();
-  };
+  }, []);
 
   return (
     <div className="space-y-12">
@@ -61,15 +41,8 @@ function Home(): JSX.Element {
             신뢰할 수 있는 성인용품점 정보와 리뷰를 확인하고 나에게 맞는 매장을 쉽게 찾아보세요.
           </p>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-            <Button variant="white" size="lg" onClick={() => handleLocationRequest()}>
-              내 주변 상점 찾기
-            </Button>
             <Link to="/categories">
-              <Button
-                variant="outline"
-                size="lg"
-                className="text-white border-white hover:bg-white hover:text-purple-600"
-              >
+              <Button variant="white" size="lg" className=" hover:text-purple-600">
                 카테고리별 보기
               </Button>
             </Link>
@@ -119,51 +92,11 @@ function Home(): JSX.Element {
         )}
       </section>
 
-      {/* 주변 상점 섹션 */}
-      {location && (
-        <section>
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">내 주변 성인용품점</h2>
-            <Link
-              to={`/search?latitude=${location.latitude}&longitude=${location.longitude}`}
-              className="text-purple-600 dark:text-purple-400 hover:underline"
-            >
-              모두 보기
-            </Link>
-          </div>
-          {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[...Array(4)].map((_, index) => (
-                <div
-                  key={index}
-                  className="bg-gray-200 dark:bg-gray-700 animate-pulse h-64 rounded-lg"
-                ></div>
-              ))}
-            </div>
-          ) : nearbyShops.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {nearbyShops.map((shop) => (
-                <ShopCard key={shop.id} shop={shop} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-500 dark:text-gray-400 mb-4">
-                주변에 등록된 성인용품점이 없습니다.
-              </p>
-              <Button variant="outline" size="md" onClick={() => handleLocationRequest()}>
-                위치 다시 가져오기
-              </Button>
-            </div>
-          )}
-        </section>
-      )}
-
       {/* 가입 유도 섹션 (비로그인 사용자에게만 표시) */}
       {!isAuthenticated && (
         <section className="bg-gray-100 dark:bg-gray-800 rounded-xl p-8 text-center">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-            더 많은 기능을 사용해보세요
+            더 많은 정보를 경험해보세요
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
             회원가입하고 리뷰 작성, 즐겨찾기 등 다양한 기능을 이용해보세요.
