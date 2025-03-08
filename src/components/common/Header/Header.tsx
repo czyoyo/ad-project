@@ -93,7 +93,7 @@ function Header(): JSX.Element {
                   : 'text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400'
               } transition-colors duration-200 font-medium`}
             >
-              제품 카테고리 & 검색
+              제품 카테고리
             </Link>
             <Link
               to="/adult-product-list"
@@ -113,7 +113,17 @@ function Header(): JSX.Element {
                   : 'text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400'
               } transition-colors duration-200 font-medium`}
             >
-              소개
+              서비스 소개
+            </Link>
+            <Link
+              to="/contact"
+              className={`${
+                isActiveLink('/about')
+                  ? 'text-purple-600 dark:text-purple-400'
+                  : 'text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400'
+              } transition-colors duration-200 font-medium`}
+            >
+              문의하기
             </Link>
           </nav>
 

@@ -22,7 +22,7 @@ function Footer(): JSX.Element {
             </Link>
             <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
               성인용품점을 손쉽게 찾고 비교할 수 있는 서비스를 제공합니다. 신뢰할 수 있는 상점
-              정보를 확인해보세요. 문의 사항은 <Link to="/contact">여기</Link>로 연락해주세요.
+              정보를 확인해보세요.
             </p>
           </div>
 
@@ -34,18 +34,26 @@ function Footer(): JSX.Element {
             <ul className="mt-4 space-y-2">
               <li>
                 <Link
-                  to="/categories"
+                  to="/adult-shop-list"
                   className="text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
                 >
-                  카테고리
+                  상점 카테고리
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/search"
+                  to="/adult-product-list"
                   className="text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
                 >
-                  검색
+                  제품 카테고리
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/adult-product-list"
+                  className="text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
+                >
+                  익명 게시판
                 </Link>
               </li>
               <li>
