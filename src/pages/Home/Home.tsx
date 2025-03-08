@@ -143,7 +143,7 @@ function Home(): JSX.Element {
         <section className="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl p-8 text-center">
           <h2 className="text-2xl font-bold text-white mb-4">더 많은 정보를 경험해보세요</h2>
           <p className="text-purple-100 mb-6 max-w-2xl mx-auto">
-            회원가입하고 리뷰 작성, 즐겨찾기 등 다양한 기능을 이용해보세요.
+            회원가입하고 익명 리뷰 조회 및 작성을 사용해보세요.
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
             <Link to="/register">
