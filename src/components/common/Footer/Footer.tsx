@@ -22,7 +22,7 @@ function Footer(): JSX.Element {
             </Link>
             <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
               성인용품점을 손쉽게 찾고 비교할 수 있는 서비스를 제공합니다. 신뢰할 수 있는 상점
-              정보와 리뷰를 확인해보세요.
+              정보를 확인해보세요. 문의 사항은 <Link to="/contact">여기</Link>로 연락해주세요.
             </p>
           </div>
 

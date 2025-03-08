@@ -96,6 +96,16 @@ function Header(): JSX.Element {
               제품 카테고리 & 검색
             </Link>
             <Link
+              to="/adult-product-list"
+              className={`${
+                isActiveLink('/about')
+                  ? 'text-purple-600 dark:text-purple-400'
+                  : 'text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400'
+              } transition-colors duration-200 font-medium`}
+            >
+              익명 게시판
+            </Link>
+            <Link
               to="/about"
               className={`${
                 isActiveLink('/about')
