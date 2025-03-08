@@ -63,10 +63,6 @@ function Header(): JSX.Element {
             </Link>
           </div>
 
-          <div className="p-4 bg-white dark:bg-purple-950 text-black dark:text-white">
-            이 텍스트는 다크모드에서 색상이 변경됩니다.
-          </div>
-
           {/* 데스크톱 네비게이션 */}
           <nav className="hidden md:flex space-x-8">
             <Link
