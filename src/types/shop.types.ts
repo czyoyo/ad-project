@@ -6,6 +6,7 @@ export interface Shop {
   rating: number;
   reviewCount: number;
   status: ShopStatus;
+  thumbnailUrl: string;
   images: ShopImage[];
   features: ShopFeatures;
   distance?: number; // Only used in search results

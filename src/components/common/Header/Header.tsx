@@ -76,24 +76,24 @@ function Header(): JSX.Element {
               홈
             </Link>
             <Link
-              to="/categories"
+              to="/adult-shop-list"
               className={`${
                 isActiveLink('/categories')
                   ? 'text-purple-600 dark:text-purple-400'
                   : 'text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400'
               } transition-colors duration-200 font-medium`}
             >
-              카테고리
+              상점 카테고리
             </Link>
             <Link
-              to="/search"
+              to="/adult-product-list"
               className={`${
-                isActiveLink('/search')
+                isActiveLink('/about')
                   ? 'text-purple-600 dark:text-purple-400'
                   : 'text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400'
               } transition-colors duration-200 font-medium`}
             >
-              검색
+              제품 카테고리 & 검색
             </Link>
             <Link
               to="/about"

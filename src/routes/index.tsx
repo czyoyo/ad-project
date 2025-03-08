@@ -25,7 +25,10 @@ import PrivacyPolicy from '../pages/Legal/PrivacyPolicy';
 import TermsOfService from '../pages/Legal/TermsOfService';
 import ResetPassword from '../pages/ResetPassword/ResetPassword';
 import Contact from '../pages/Contact/Contact';
-import ForbiddenPage from '../pages/ForbiddenPage/ForbiddenPage'; // 🔥 403 페이지 추가
+import ForbiddenPage from '../pages/ForbiddenPage/ForbiddenPage';
+import ProductSearch from '../pages/CategorySearch/ProductSearch.tsx';
+import AdultShopList from '../pages/AdultShopList/AdultShopList.tsx';
+import AdultProductList from '../pages/AdultProductList/AdultProductList.tsx';
 
 function AppRoutes(): JSX.Element {
   return (
@@ -41,6 +44,9 @@ function AppRoutes(): JSX.Element {
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />
+        <Route path="/product-search" element={<ProductSearch />} />
+        <Route path="/adult-shop-list" element={<AdultShopList />} />
+        <Route path="/adult-product-list" element={<AdultProductList />} />
         <Route path="/403" element={<ForbiddenPage />} /> {/* 🔥 403 접근 금지 페이지 */}
         {/* 인증이 필요한 라우트 */}
         <Route
